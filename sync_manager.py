@@ -7,8 +7,8 @@ Responsibilities:
   1. Stores all emergency events, geofence transitions, and audio evidence
      locally first in `data/offline_events_vault.json`.
   2. Runs an autonomous background sync daemon that monitors backend connectivity.
-  3. When the network is restored, automatically uploads pending emergency
-     events and multipart audio recordings to the Flask backend with exponential
+  3. When a local sync service is available, uploads pending emergency
+     events and multipart audio recordings with exponential
      retry and transactional integrity.
   4. Guarantees zero data loss during dead zones, offline scenarios, and crashes.
 """

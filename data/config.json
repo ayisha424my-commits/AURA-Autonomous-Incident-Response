@@ -1,0 +1,5 @@
+{
+  "delay_timer": 15,
+  "escalation_timeout": 60,
+  "speed_threshold": 80
+}

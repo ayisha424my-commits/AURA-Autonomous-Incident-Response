@@ -7,12 +7,20 @@ import math
 import platform
 import threading
 import subprocess
+import wave
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import messagebox, ttk
+from datetime import datetime
 from acoustic_module import OfflineAcousticEngine
 import map_simulator
 import map_config
-from macrodroid_dispatch_module import trigger_aura_sos
+import settings_module
+
+is_emergency_active = False
+
+# Temporarily bypass the persisted armed-session shortcut so each launch opens
+# the Login / Setup screen. Saved profile data remains available for setup.
+AUTO_LOGIN_ENABLED = False
 
 try:
     import pygame
@@ -73,6 +81,7 @@ _P = {
 
     # Text
     "text_hi":    "#f1f5f9",
+    "text_bright":"#f8fafc",
     "text_mid":   "#94a3b8",
     "text_dim":   "#475569",
 
@@ -107,6 +116,12 @@ class ModernSafetyApp:
 
         os.makedirs(os.path.join("recordings", "audio"), exist_ok=True)
         os.makedirs(os.path.join("recordings", "video"), exist_ok=True)
+        project_root = os.path.dirname(os.path.abspath(__file__))
+        self.vault_audio_dir = os.path.join(project_root, "data", "vault", "audio")
+        self.vault_video_dir = os.path.join(project_root, "data", "vault", "video")
+        os.makedirs(self.vault_audio_dir, exist_ok=True)
+        os.makedirs(self.vault_video_dir, exist_ok=True)
+        self._vault_playback_job = None
         os.makedirs("assets", exist_ok=True)
         os.makedirs("data", exist_ok=True)
 
@@ -121,15 +136,13 @@ class ModernSafetyApp:
         self.user_phone  = ""
         self.contacts    = []    # [{name, phone}, …] — index 0 = P1
         self.safe_locations = []
-        self.real_pin    = "1234"
-        self.fake_pin    = "9999"
         self.delay_timer = tk.IntVar(value=15)
-        self.enable_macrodroid = tk.BooleanVar(value=True)
+        self.enable_usb_dispatch = tk.BooleanVar(value=True)
         self.contact_rows = []
 
         # ── Extended Safety Configuration State ──────────────────────────────
-        self.escalation_timeout_var = tk.IntVar(value=60)   # Configurable 60 - 120s
-        self.speed_threshold_var    = tk.IntVar(value=80)   # Configurable km/h threshold
+        self.escalation_timeout_var = tk.IntVar(value=60)   # Configurable 20 - 120s
+        self.speed_threshold_var    = tk.IntVar(value=25)   # Speed anomaly threshold (km/h)
         self.active_threat_reason   = ""
 
         # ── Predefined Destination & Free Roam Map Movement State ────────────
@@ -149,31 +162,39 @@ class ModernSafetyApp:
         self._map_base_drawn        = False
         self.demo_coords            = []
 
-        # ── Display Only Mode (Show Only: Map & Telemetry visually without executing actions) ──
         self.display_only_mode      = False
         if self.controller:
             self.controller.display_only_mode = self.display_only_mode
 
-        # ── MacroDroid contact entries (set by settings dialog) ───────────────
-        # p1_entry / p2_entry are populated once the dashboard is built.
         self.p1_entry = None
         self.p2_entry = None
 
-        # ── Threat / timer state ──────────────────────────────────────────────
         self.time_left        = 15
         self.total_time       = 15
         self.is_threat_active = False
+        # Explicit popup lifecycle flags. These describe the confirmation
+        # popup only; the emergency dispatch state has its own flag above.
+        self.alert_active     = False
+        self.popup_showing    = False
+        self.is_emergency_active = False
         self.timer_job        = None
+        self.threat_popup     = None
+        self.timer_canvas     = None
+        self._emergency_banner_frame = None
+        self._emergency_overlay = None
+        self._emergency_flash_job = None
+        self._emergency_flash_on = False
+        self._popup_chime_stop = threading.Event()
 
         self.is_protection_active  = False
         self.low_battery_alert_sent = False
 
-        # ── StringVars used across the dashboard ──────────────────────────────
         self.battery_status_str = tk.StringVar(value="🔋 Battery: 100%")
         self.signal_status_str  = tk.StringVar(value="📶 Signal: Checking…")
+        self.usb_dispatch_status_str = tk.StringVar(value="Checking ADB connection…")
+        self.usb_dispatch_status_color = "#64748b"
         self.speed_indicator_str = tk.StringVar(value="Speed: -- km/h")
 
-        # Live telemetry sidebar vars
         self._tele_speed    = tk.StringVar(value="-- km/h")
         self._tele_seg_dist = tk.StringVar(value="-- m")
         self._tele_cum_dist = tk.StringVar(value="-- km")
@@ -189,72 +210,39 @@ class ModernSafetyApp:
         self.main_container = tk.Frame(self.root, bg=_P["bg_root"])
         self.main_container.pack(fill="both", expand=True)
 
-        self.root.bind("<Escape>", lambda e: self.dismiss_alarm("ESC Key Pressed"))
+        self.root.bind_all("<Escape>", lambda e: self.dismiss_alarm("ESC Key Pressed"))
 
         self.map_trail_points = []
 
-        self.profile_path = os.path.join("data", "user_profile.json")
+        self.profile_path = os.path.join(
+            os.path.dirname(os.path.abspath(__file__)), settings_module.PROFILE_PATH
+        )
+        self._alert_overlay = None
+        self._usb_was_linked = None
         self.load_user_profile()
 
         threading.Thread(target=self.monitor_battery_status, daemon=True).start()
         self.show_splash_screen()
 
-    # ═══════════════════════════════════════════════════════════════════════════
-    # Profile Persistence
-    # ═══════════════════════════════════════════════════════════════════════════
-
     def load_user_profile(self):
-        """Restores user profile, contacts, and custom PINs across application restarts."""
-        if os.path.exists(self.profile_path):
-            try:
-                import json
-                with open(self.profile_path, "r", encoding="utf-8") as f:
-                    p = json.load(f)
-                    self.user_name = p.get("user_name", "")
-                    self.user_phone = p.get("user_phone", "")
-                    self.contacts = p.get("contacts", [])
-                    self.real_pin = p.get("real_pin", getattr(self, "real_pin", "1234"))
-                    self.fake_pin = p.get("fake_pin", getattr(self, "fake_pin", "9999"))
-                    dt = p.get("delay_timer", 15)
-                    self.delay_timer.set(dt if dt in (15, 30) else 15)
-                    self.escalation_timeout_var.set(int(p.get("escalation_timeout", 60)))
-                    self.speed_threshold_var.set(int(p.get("speed_threshold", 80)))
-                    self.is_protection_active = False
-                    if self.contacts and self.user_name:
-                        if self.controller:
-                            self.controller.set_emergency_contacts([c["phone"] for c in self.contacts])
-                            self.controller.set_pins(self.real_pin, self.fake_pin)
-                            self.controller.call_escalation_timeout_sec = self.escalation_timeout_var.get()
-                            if hasattr(self.controller, "anomaly_engine"):
-                                self.controller.anomaly_engine.set_speed_threshold(self.speed_threshold_var.get())
-                print(f"✅ [Profile] Loaded profile for '{self.user_name}' with {len(self.contacts)} emergency contacts.")
-            except Exception as e:
-                print(f"[Profile Load Warning] {e}")
+        """Restores contacts and thresholds from local JSON (never used to pre-fill setup fields)."""
+        try:
+            settings_module.apply_profile_to_app(self)
+        except Exception as e:
+            print(f"[Profile Load Warning] {e}")
 
     def save_user_profile(self):
-        """Saves current user profile, contacts, and custom PINs to disk."""
+        """Save the profile and emergency contacts to the local JSON file."""
         try:
-            import json
-            data = {
-                "user_name": self.user_name,
-                "user_phone": self.user_phone,
-                "contacts": self.contacts,
-                "delay_timer": self.delay_timer.get(),
-                "escalation_timeout": self.escalation_timeout_var.get(),
-                "speed_threshold": self.speed_threshold_var.get(),
-                "real_pin": getattr(self, "real_pin", "1234"),
-                "fake_pin": getattr(self, "fake_pin", "9999"),
-                "is_protection_active": self.is_protection_active
-            }
-            with open(self.profile_path, "w", encoding="utf-8") as f:
-                json.dump(data, f, indent=2)
+            settings_module.save_user_profile(
+                settings_module.collect_profile_from_app(self),
+                path=self.profile_path,
+            )
             print("💾 [Profile] User profile saved successfully.")
+            return True
         except Exception as e:
             print(f"[Profile Save Warning] {e}")
-
-    # ═══════════════════════════════════════════════════════════════════════════
-    # Helpers
-    # ═══════════════════════════════════════════════════════════════════════════
+            return False
 
     def send_desktop_popup(self, title, message):
         """Dispatches an audible alert and an OS desktop notification toast with rate limiting."""
@@ -262,7 +250,7 @@ class ModernSafetyApp:
         if not hasattr(self, "_popup_history"):
             self._popup_history = {}
         last_time = self._popup_history.get(title, 0)
-        # Suppress repeated identical desktop notifications within 10 seconds
+
         if now - last_time < 10.0:
             return
         self._popup_history[title] = now
@@ -330,8 +318,6 @@ class ModernSafetyApp:
             return ""
         return entry.get().strip()
 
-    # ── Reusable widget factories ─────────────────────────────────────────────
-
     def _glowing_label(self, parent, text, font_size=8, color=None,
                        bg=None, **kwargs):
         """A label styled as a glowing status badge."""
@@ -394,10 +380,6 @@ class ModernSafetyApp:
         c.bind("<Leave>",    _hout)
         return wrap
 
-    # ═══════════════════════════════════════════════════════════════════════════
-    # 1 – SPLASH SCREEN
-    # ═══════════════════════════════════════════════════════════════════════════
-
     def show_splash_screen(self):
         self.clear_container()
         splash = tk.Frame(self.main_container, bg=_P["bg_root"])
@@ -453,9 +435,8 @@ class ModernSafetyApp:
             time.sleep(2.0)
             self._spinner_active = False
             try:
-                if self.is_protection_active and self.contacts:
-                    self.start_safety_monitoring_loop()
-                    self.root.after(0, lambda: self.build_modern_dashboard(pending_notification="✅ System Armed (Restored from Profile)"))
+                if AUTO_LOGIN_ENABLED and self.is_protection_active and self.contacts:
+                    self.root.after(0, self._restore_armed_profile)
                 else:
                     self.root.after(0, self.build_setup_screen)
             except Exception:
@@ -463,9 +444,33 @@ class ModernSafetyApp:
 
         threading.Thread(target=_launch, daemon=True).start()
 
-    # ═══════════════════════════════════════════════════════════════════════════
-    # 2 – SETUP SCREEN
-    # ═══════════════════════════════════════════════════════════════════════════
+    def _restore_armed_profile(self):
+        """Restore the voice listener and contacts together with the saved armed state."""
+        try:
+            self._activate_voice_recognition()
+        except Exception as exc:
+            print(f"❌ [Voice] Could not restore armed voice recognition: {exc}")
+        self.start_safety_monitoring_loop()
+        self.build_modern_dashboard(
+            pending_notification="✅ System Armed (Restored from Profile)"
+        )
+
+    def _activate_voice_recognition(self):
+        if self.controller:
+            numbers = [
+                contact.get("phone", "") if isinstance(contact, dict) else str(contact)
+                for contact in self.contacts
+            ]
+            self.controller.set_emergency_contacts([number for number in numbers if number])
+            self.controller.start_voice_recognition(armed=True)
+            self.acoustic_engine = self.controller.acoustic_engine
+        else:
+            if self.acoustic_engine is None:
+                self.acoustic_engine = OfflineAcousticEngine(
+                    trigger_callback=self.handle_voice_event
+                )
+            self.acoustic_engine.start_listening()
+            self.acoustic_engine.set_setup_complete(True)
 
     def build_setup_screen(self):
         self.clear_container()
@@ -482,9 +487,7 @@ class ModernSafetyApp:
         tk.Label(hdr, text="🛡️  AURA SAFETY ENGINE SETUP",
                  font=("Segoe UI", 15, "bold"),
                  fg=_P["accent"], bg=_P["bg_panel"]).pack(anchor="w")
-        sub_desc = "AI-Powered Offline Edge Emergency Protection"
-        if self.user_name:
-            sub_desc += "  •  Saved Profile Restored"
+        sub_desc = "AI-Powered Offline Edge Emergency Protection  •  New configuration (fields stay blank)"
         tk.Label(hdr, text=sub_desc,
                  font=("Segoe UI", 9), fg=_P["text_dim"],
                  bg=_P["bg_panel"]).pack(anchor="w", pady=(2, 10))
@@ -508,13 +511,9 @@ class ModernSafetyApp:
 
         _lbl("FULL NAME")
         e_name = _entry()
-        if self.user_name:
-            e_name.insert(0, self.user_name)
 
         _lbl("MOBILE NUMBER  (10 digits)")
         e_phone = _entry()
-        if self.user_phone:
-            e_phone.insert(0, self.user_phone)
 
         # Emergency contacts
         contacts_hdr = tk.Frame(frm, bg=_P["bg_panel"])
@@ -594,11 +593,8 @@ class ModernSafetyApp:
                                        "name_entry": e_cn,
                                        "phone_entry": e_cp})
 
-        if self.contacts:
-            for c in self.contacts:
-                _add_contact_row(init_name=c.get("name", ""), init_phone=c.get("phone", ""))
-        else:
-            _add_contact_row()
+        # Setup fields stay blank for a new configuration (do not restore prior contacts).
+        _add_contact_row()
 
         def _do_setup():
             n = e_name.get().strip()
@@ -632,29 +628,34 @@ class ModernSafetyApp:
             self.user_phone = p
             self.contacts   = parsed
             self.is_protection_active = True
-            self.save_user_profile()
-
-            if self.controller:
-                self.controller.set_emergency_contacts(
-                    [c["phone"] for c in parsed])
+            if not self.save_user_profile():
+                self.is_protection_active = False
+                messagebox.showerror(
+                    "Setup Error",
+                    f"Could not save your profile to:\n{self.profile_path}\n\nCheck that the data folder is writable and try again.",
+                )
+                return
 
             try:
                 if self.controller:
-                    self.controller.acoustic_engine.trigger_callback = self.handle_voice_event
-                    self.controller.acoustic_engine.start_listening()
-                    self.controller.acoustic_engine.set_setup_complete(True)
-                    self.acoustic_engine = self.controller.acoustic_engine
-                else:
-                    self.acoustic_engine = OfflineAcousticEngine(
-                        trigger_callback=self.handle_voice_event)
-                    self.acoustic_engine.start_listening()
-                    self.acoustic_engine.set_setup_complete(True)
-            except Exception as e:
-                print(f"Acoustic startup: {e}")
-
-            self.start_safety_monitoring_loop()
+                    self.controller.set_emergency_contacts(
+                        [c["phone"] for c in parsed])
+                self._activate_voice_recognition()
+            except Exception as exc:
+                print(f"❌ [Setup] Protection startup warning: {exc}")
+                messagebox.showwarning(
+                    "Protection Startup Warning",
+                    f"Your profile was saved, but a protection service did not start:\n{exc}\n\nThe dashboard will still open.",
+                )
+            try:
+                self.start_safety_monitoring_loop()
+            except Exception as exc:
+                print(f"❌ [Setup] Safety monitor startup warning: {exc}")
+            # Replacing the setup contents with the dashboard completes activation
+            # even if an optional voice or monitoring service reported an error.
             self.build_modern_dashboard(
                 pending_notification="✅ System Armed & Protection Active")
+            self.root.after_idle(self.open_map_simulator)
 
         tk.Button(
             setup_card,
@@ -747,44 +748,17 @@ class ModernSafetyApp:
         self.build_modern_dashboard(pending_notification=msg, is_warning=True)
 
     # ═══════════════════════════════════════════════════════════════════════════
-    # 3 – DURESS SECURITY DIALOG
+    # 3 – SYSTEM DISARM CONFIRMATION
     # ═══════════════════════════════════════════════════════════════════════════
 
     def open_deactivation_dialog(self):
-        dlg = tk.Toplevel(self.root)
-        dlg.title("System Deactivation")
-        dlg.geometry("360x240")
-        dlg.configure(bg=_P["bg_panel"])
-        dlg.transient(self.root)
-        dlg.grab_set()
-
-        tk.Label(dlg, text="🔒  ENTER SECURITY PIN",
-                 font=("Segoe UI", 12, "bold"),
-                 fg=_P["red"], bg=_P["bg_panel"]).pack(pady=20)
-        pin_e = tk.Entry(dlg, show="●", font=("Segoe UI", 16),
-                         bg=_P["bg_input"], fg=_P["text_hi"],
-                         justify="center", bd=0, insertbackground=_P["accent"])
-        pin_e.pack(ipady=8, padx=36, fill="x")
-
-        def _process():
-            pin = pin_e.get().strip()
-            res = "SUCCESS_DISABLE"
-            if self.controller:
-                res = self.controller.verify_duress_pin(pin, gui_root=self.root)
-            else:
-                if pin == "9999":   res = "FAKE_DISABLE_ACTIVE"
-                elif pin == "1234": res = "SUCCESS_DISABLE"
-            dlg.destroy()
-            if res == "SUCCESS_DISABLE":
-                self.root.destroy()
-            elif res in ("FAKE_SHUTDOWN", "FAKE_DISABLE_ACTIVE"):
-                self.trigger_fake_shutdown()
-
-        tk.Button(dlg, text="CONFIRM DISARM",
-                  font=("Segoe UI", 10, "bold"),
-                  bg=_P["red"], fg="#fff", bd=0,
-                  command=_process).pack(pady=20, ipady=8,
-                                         padx=36, fill="x")
+        if not messagebox.askyesno("Disarm protection", "Turn off AURA protection for this session?"):
+            return
+        self.dismiss_alarm("Protection manually disarmed")
+        self.is_protection_active = False
+        if self.controller:
+            self.controller.system_status = "DEACTIVATED"
+        self.build_setup_screen()
 
     def trigger_stealth_fake_shutdown(self):
         self.clear_container()
@@ -806,6 +780,7 @@ class ModernSafetyApp:
                                 is_error=False, is_warning=False,
                                 impact_alert=None):
         self.clear_container()
+        self._emergency_banner_frame = None
         self.map_trail_points = []
 
         # Entering user dashboard defaults map to Display Only mode (Show Only — no actions taken)
@@ -871,6 +846,8 @@ class ModernSafetyApp:
             tk.Label(bar, text=pending_notification,
                      font=("Segoe UI", 9, "bold"),
                      fg=fg_c, bg=bg_c).pack()
+            if is_error and "EMERGENCY ALERT DISPATCHED" in str(pending_notification).upper():
+                self._emergency_banner_frame = bar
 
         # ── Body ──────────────────────────────────────────────────────────────
         body = tk.Frame(self.main_container, bg=_P["bg_root"])
@@ -914,10 +891,9 @@ class ModernSafetyApp:
                  font=("Segoe UI", 8),
                  fg=_P["text_mid"], bg=_P["bg_card"]).pack(anchor="w")
 
-        # MacroDroid P1 / P2 entries (Read-only on dashboard; updated exclusively via modal)
         md_card = self._card(parent, accent_color="#7c3aed")
         md_card.pack(fill="x", pady=(0, 8))
-        self._section_header(md_card.content, "📡", "MACRODROID DISPATCH CONTACTS", "#7c3aed")
+        self._section_header(md_card.content, "📡", "EMERGENCY DISPATCH CONTACTS (USB/ADB)", "#7c3aed")
 
         p1_val = self.contacts[0]["phone"] if len(self.contacts) > 0 and self.contacts[0].get("phone") else "Not configured"
         p2_val = self.contacts[1]["phone"] if len(self.contacts) > 1 and self.contacts[1].get("phone") else "Not configured"
@@ -993,8 +969,8 @@ class ModernSafetyApp:
         vf.pack(fill="x", pady=4)
 
         for icon, label, color, folder, attr in [
-            ("🎙️", "Audio Vault",  _P["accent"],  os.path.join("recordings", "audio"), "a_count_lbl"),
-            ("📹", "Video Vault",  _P["purple"], os.path.join("recordings", "video"),  "v_count_lbl"),
+            ("🎙️", "Audio Vault",  _P["accent"],  self.vault_audio_dir, "a_count_lbl"),
+            ("📹", "Video Vault",  _P["purple"], self.vault_video_dir, "v_count_lbl"),
         ]:
             fr = tk.Frame(vf, bg=_P["bg_card2"], cursor="hand2")
             fr.pack(side="left", fill="both", expand=True,
@@ -1005,7 +981,7 @@ class ModernSafetyApp:
             lbl_title = tk.Label(fr, text=label, font=("Segoe UI", 8, "bold"),
                                  fg=color, bg=_P["bg_card2"], cursor="hand2")
             lbl_title.pack()
-            cnt = tk.Label(fr, text="0 files", font=("Segoe UI", 7),
+            cnt = tk.Label(fr, text=f"{label}: 0 file(s)", font=("Segoe UI", 7),
                            fg=_P["text_dim"], bg=_P["bg_card2"], cursor="hand2")
             cnt.pack()
             setattr(self, attr, cnt)
@@ -1041,18 +1017,6 @@ class ModernSafetyApp:
         tk.Button(self.escalation_frame, text="Dismiss Escalation", font=("Segoe UI", 7, "bold"),
                   bg=_P["red"], fg="#fff", bd=0, cursor="hand2",
                   command=self.cancel_escalation_by_user).pack(side="right", padx=6, pady=2)
-
-        # Predefined Destination control bar
-        dest_bar = tk.Frame(parent, bg=_P["bg_card"], padx=6, pady=4)
-        dest_bar.pack(fill="x", pady=(0, 6))
-        tk.Button(dest_bar, text="🎯 Set Destination", font=("Segoe UI", 8, "bold"),
-                  bg=_P["accent"], fg=_P["bg_root"], bd=0, cursor="hand2", padx=6, pady=2,
-                  command=self.open_destination_dialog).pack(side="left", padx=(0, 4))
-        tk.Button(dest_bar, text="✖ Clear", font=("Segoe UI", 8),
-                  bg="#334155", fg=_P["text_hi"], bd=0, cursor="hand2", padx=4, pady=2,
-                  command=self.clear_trip_destination).pack(side="left", padx=(0, 6))
-        tk.Label(dest_bar, textvariable=self.destination_status_str, font=("Segoe UI", 8, "bold"),
-                 fg=_P["purple"], bg=_P["bg_card"]).pack(side="left")
 
         # Live View-Only Status Bar
         view_bar = tk.Frame(parent, bg=_P["bg_card"], padx=8, pady=4)
@@ -1145,7 +1109,7 @@ class ModernSafetyApp:
         # Map simulator launcher & clear buttons
         tk.Button(
             parent,
-            text="🎮  Open Interactive Map Simulator (Move Map & Action Controls)",
+            text="🎮  Open Route Telemetry Controller",
             font=("Segoe UI", 9, "bold"),
             bg="#1e3a5f", fg=_P["accent"],
             activebackground="#2563eb", activeforeground="#ffffff",
@@ -1195,19 +1159,21 @@ class ModernSafetyApp:
                      fg=_P["text_dim"], bg=_P["bg_card"],
                      anchor="w", width=12).pack(side="left",
                                                 padx=(6, 2), pady=4)
-            tk.Label(row, textvariable=var, font=("Segoe UI", 8, "bold"),
-                     fg=color, bg=_P["bg_card"],
-                     anchor="w").pack(side="left", padx=(0, 6))
+            value_label = tk.Label(row, textvariable=var, font=("Segoe UI", 8, "bold"),
+                                   fg=color, bg=_P["bg_card"], anchor="w")
+            value_label.pack(side="left", padx=(0, 6))
+            if var is self._tele_threat:
+                self._tele_threat_label = value_label
 
         # Separator
         tk.Frame(parent, bg=_P["border"], height=1).pack(fill="x", pady=8)
 
-        # Geofence
+        # Geofences
         geo_card = self._card(parent, accent_color=_P["green"])
         geo_card.pack(fill="x", pady=2)
         self._section_header(geo_card.content, "📍", "SAFE ZONES", _P["green"])
         tk.Label(geo_card.content,
-                 text=f"Zones: {', '.join(self.safe_locations)}",
+                 text="Home-Botanical_Campus",
                  font=("Segoe UI", 7), fg=_P["text_mid"],
                  bg=_P["bg_card"]).pack(anchor="w")
 
@@ -1221,9 +1187,40 @@ class ModernSafetyApp:
         tk.Label(hw_card.content, textvariable=self.signal_status_str,
                  font=("Segoe UI", 8), fg=_P["green"],
                  bg=_P["bg_card"]).pack(anchor="w")
+        usb_status_row = tk.Frame(hw_card.content, bg=_P["bg_card"])
+        usb_status_row.pack(fill="x", pady=(3, 0))
+        self.usb_status_led = tk.Canvas(
+            usb_status_row, width=14, height=14, bg=_P["bg_card"],
+            highlightthickness=0,
+        )
+        self.usb_status_led.pack(side="left", padx=(0, 5))
+        self.usb_status_led.create_oval(
+            2, 2, 12, 12, fill=self.usb_dispatch_status_color,
+            outline="", tags="usb_status_led",
+        )
+        self.usb_status_label = tk.Label(
+            usb_status_row, textvariable=self.usb_dispatch_status_str,
+            font=("Segoe UI", 8, "bold"), fg=self.usb_dispatch_status_color,
+            bg=_P["bg_card"], anchor="w",
+        )
+        self.usb_status_label.pack(side="left")
         tk.Label(hw_card.content, textvariable=self.battery_status_str,
                  font=("Segoe UI", 8), fg=_P["amber"],
                  bg=_P["bg_card"]).pack(anchor="w")
+
+    def update_usb_dispatch_status(self, connected):
+        """Render ADB link status only; connectivity changes never trigger SOS."""
+        connected = bool(connected)
+        color = "#22c55e" if connected else "#64748b"
+        label = "Connected (USB Online)" if connected else "Disconnected (Phone Dispatch Unavailable)"
+        self.usb_dispatch_status_color = color
+        self.usb_dispatch_status_str.set(label)
+        led = getattr(self, "usb_status_led", None)
+        if led is not None and led.winfo_exists():
+            led.itemconfigure("usb_status_led", fill=color)
+        status_label = getattr(self, "usb_status_label", None)
+        if status_label is not None and status_label.winfo_exists():
+            status_label.configure(fg=color)
 
     def open_phone_connection_dialog(self):
         """Dedicated Mobile Phone Connection & Offline Telephony Management dialog."""
@@ -1260,16 +1257,21 @@ class ModernSafetyApp:
         lbl_ports.pack(fill="x", pady=2)
 
         def _refresh_phone_status():
-            info = {"adb_installed": False, "device_connected": False}
-            if self.controller and hasattr(self.controller, "get_phone_status"):
-                info = self.controller.get_phone_status()
-            elif self.controller and hasattr(self.controller, "telephony_manager"):
-                info = self.controller.telephony_manager.check_phone_connection()
+            try:
+                info = self.controller.get_phone_status() if (
+                    self.controller and hasattr(self.controller, "get_phone_status")
+                ) else {"adb_installed": False, "device_connected": False}
+            except Exception as exc:
+                info = {"adb_installed": True, "device_connected": False, "error": str(exc)}
 
             if not info.get("adb_installed"):
                 lbl_dev.config(text="❌ ADB Tool Not Found in System PATH", fg=_P["red"])
                 lbl_sim.config(text="Please install Android Platform Tools (ADB) to enable phone control.")
                 lbl_ports.config(text="")
+            elif info.get("error"):
+                lbl_dev.config(text="⚠️ ADB device check failed", fg=_P["amber"])
+                lbl_sim.config(text=str(info["error"])[:180], fg=_P["text_mid"])
+                lbl_ports.config(text="Retrying automatically; check USB debugging authorization if needed.")
             elif info.get("device_connected"):
                 model = info.get("device_model", "Android Device")
                 dev_id = info.get("device_id", "")
@@ -1279,10 +1281,15 @@ class ModernSafetyApp:
                 lbl_ports.config(text="🔄 Telemetry & GPS Bridge Forwarding Active (8080, 8082)")
                 self.signal_status_str.set(f"📱 Phone: {model}")
             else:
-                lbl_dev.config(text="⚠️ No Android Phone Detected", fg=_P["amber"])
-                lbl_sim.config(text="Connect phone via USB (with USB Debugging) or Wi-Fi below.", fg=_P["text_mid"])
-                lbl_ports.config(text="Offline SMS will fallback to queuing until phone is linked.")
-                self.signal_status_str.set("📱 Phone: Disconnected")
+                if info.get("device_state") == "unauthorized":
+                    lbl_dev.config(text=f"⚠️ Authorize USB debugging: {info.get('device_id', '')}", fg=_P["amber"])
+                    lbl_sim.config(text="Unlock the phone and accept the USB debugging authorization prompt.", fg=_P["text_mid"])
+                    lbl_ports.config(text="Then this dialog will detect it automatically.")
+                else:
+                    lbl_dev.config(text="⚠️ No Android Phone Detected", fg=_P["amber"])
+                    lbl_sim.config(text="Connect phone via USB (with USB Debugging) or Wi-Fi below.", fg=_P["text_mid"])
+                    lbl_ports.config(text="Offline SMS will fallback to queuing until phone is linked.")
+                    self.signal_status_str.set("📱 Phone: Disconnected")
 
         _refresh_phone_status()
 
@@ -1296,13 +1303,17 @@ class ModernSafetyApp:
                  font=("Segoe UI", 8), fg=_P["text_dim"], bg=_P["bg_card"]).pack(anchor="w", pady=(0, 6))
 
         def _do_usb_connect():
-            if self.controller and hasattr(self.controller, "connect_mobile_phone"):
-                info = self.controller.connect_mobile_phone()
-            else:
-                info = {}
+            try:
+                info = self.controller.connect_mobile_phone() if (
+                    self.controller and hasattr(self.controller, "connect_mobile_phone")
+                ) else {}
+            except Exception as exc:
+                info = {"error": str(exc)}
             _refresh_phone_status()
             if info.get("device_connected"):
                 messagebox.showinfo("Phone Connected", f"Successfully linked phone:\n{info.get('device_model')} ({info.get('device_id')})\nSIM: {info.get('sim_state')}")
+            elif info.get("error"):
+                messagebox.showerror("ADB Connection Error", str(info["error"]))
             else:
                 messagebox.showwarning("Phone Not Found", "No authorized phone detected over USB.\n\nPlease check:\n1. USB cable is firmly connected\n2. 'USB Debugging' is enabled in Android Developer Options\n3. Tap 'Allow USB Debugging' popup on phone screen.")
 
@@ -1326,19 +1337,41 @@ class ModernSafetyApp:
 
         def _do_wifi_connect():
             ip_val = e_ip.get().strip()
-            if self.controller and hasattr(self.controller, "connect_mobile_phone"):
-                res = self.controller.connect_mobile_phone(ip_val)
-            else:
-                res = {}
+            try:
+                res = self.controller.connect_mobile_phone(ip_val) if (
+                    self.controller and hasattr(self.controller, "connect_mobile_phone")
+                ) else {}
+            except Exception as exc:
+                res = {"error": str(exc)}
             _refresh_phone_status()
             if res.get("device_connected") or res.get("connected"):
                 messagebox.showinfo("Wi-Fi Connected", f"Successfully connected wirelessly to phone at {ip_val}!")
+            elif res.get("error"):
+                messagebox.showerror("Wi-Fi Connection Failed", str(res["error"]))
             else:
                 messagebox.showerror("Wi-Fi Connection Failed", f"Could not connect to {ip_val}.\nMake sure Wireless Debugging / ADB over TCP is enabled on phone.")
 
         tk.Button(wifi_row, text="Connect Wi-Fi", font=("Segoe UI", 8, "bold"),
                   bg=_P["purple"], fg="#ffffff", bd=0, cursor="hand2", padx=8, pady=3,
                   command=_do_wifi_connect).pack(side="right")
+
+        dialog_status_job = [None]
+        def _poll_phone_status():
+            if not dlg.winfo_exists():
+                return
+            _refresh_phone_status()
+            dialog_status_job[0] = dlg.after(5000, _poll_phone_status)
+
+        def _close_dialog():
+            if dialog_status_job[0] is not None:
+                try:
+                    dlg.after_cancel(dialog_status_job[0])
+                except tk.TclError:
+                    pass
+            dlg.destroy()
+
+        dlg.protocol("WM_DELETE_WINDOW", _close_dialog)
+        dialog_status_job[0] = dlg.after(5000, _poll_phone_status)
 
         # Test Offline Alert Button
         test_row = tk.Frame(dlg, bg=_P["bg_panel"], padx=20)
@@ -1355,14 +1388,25 @@ class ModernSafetyApp:
             maps_link = f"https://maps.google.com/?q={lat:.6f},{lon:.6f}"
             msg = f"TEST OFFLINE ALERT from AURA Women Safety. Current Location: Lat {lat:.6f}, Lon {lon:.6f}. Map: {maps_link}"
 
-            if self.controller and hasattr(self.controller, "telephony_manager"):
-                res = self.controller.telephony_manager.dispatch_emergency_sms(
-                    saved_numbers, message=msg, lat=lat, lon=lon
-                )
-                messagebox.showinfo(
-                    "Test Alert Dispatched",
-                    f"Test offline alert dispatched to {len(saved_numbers)} contact(s):\n\nNumbers: {', '.join(saved_numbers)}\nLocation Link: {maps_link}\nStatus: {res.get('p1_sms', 'DISPATCHED')}"
-                )
+            dispatcher = getattr(self.controller, "usb_dispatcher", None) if self.controller else None
+            if dispatcher is not None:
+                def _send_test_alert():
+                    res = dispatcher.dispatch_threat_alert(
+                        saved_numbers, lat, lon, message_text=msg
+                    )
+                    try:
+                        self.root.after(0, lambda: messagebox.showinfo(
+                            "Test Alert Dispatched",
+                            f"Test cellular SMS attempted for {len(saved_numbers)} contact(s):\n\n"
+                            f"Numbers: {', '.join(saved_numbers)}\nLocation Link: {maps_link}\n"
+                            f"Sent: {res.get('sms_sent', 0)}"
+                        ))
+                    except tk.TclError:
+                        pass
+
+                threading.Thread(
+                    target=_send_test_alert, name="AURA-test-sms", daemon=True
+                ).start()
             else:
                 messagebox.showinfo("Test Alert", f"Alert formatted with location link:\n{maps_link}\nReady to dispatch.")
 
@@ -1377,6 +1421,37 @@ class ModernSafetyApp:
     # ═══════════════════════════════════════════════════════════════════════════
     # 5 – VAULT DIALOG
     # ═══════════════════════════════════════════════════════════════════════════
+
+    def _vault_files(self, media_type):
+        folder = self.vault_audio_dir if media_type == "audio" else self.vault_video_dir
+        return sorted(glob.glob(os.path.join(folder, "*.*")))
+
+    def _set_vault_playback(self, active):
+        if getattr(self, "_vault_playback_job", None) is not None:
+            try:
+                self.root.after_cancel(self._vault_playback_job)
+            except tk.TclError:
+                pass
+            self._vault_playback_job = None
+        engine = getattr(self, "acoustic_engine", None)
+        if engine is None and self.controller:
+            engine = getattr(self.controller, "acoustic_engine", None)
+        if engine is not None:
+            try:
+                engine.set_vault_playing(active)
+            except Exception as exc:
+                print(f"⚠️ [Vault Playback] Could not update microphone suppression: {exc}")
+
+    def _arm_external_vault_playback(self, duration_seconds):
+        """Suppress mic input through the estimated length of an external player clip."""
+        self._set_vault_playback(True)
+        if duration_seconds and duration_seconds > 0:
+            def _resume():
+                self._vault_playback_job = None
+                self._set_vault_playback(False)
+            self._vault_playback_job = self.root.after(
+                int(duration_seconds * 1000) + 1000, _resume
+            )
 
     def open_folder_contents(self, folder_path, title):
         os.makedirs(folder_path, exist_ok=True)
@@ -1699,10 +1774,12 @@ class ModernSafetyApp:
 
         def _open_ext():
             try:
+                self._arm_external_vault_playback(total_sec)
                 if platform.system() == "Windows": os.startfile(fpath)
                 elif platform.system() == "Darwin": subprocess.Popen(["open", fpath])
                 else: subprocess.Popen(["xdg-open", fpath])
             except Exception as e:
+                self._set_vault_playback(False)
                 messagebox.showerror("External Player Error", str(e))
 
         tk.Button(hdr, text="↗️ Open in Windows Player", font=("Segoe UI", 8),
@@ -1824,10 +1901,23 @@ class ModernSafetyApp:
 
         def _open_ext():
             try:
+                try:
+                    with wave.open(fpath, "rb") as audio_file:
+                        rate = audio_file.getframerate()
+                        duration = audio_file.getnframes() / rate if rate else None
+                except Exception:
+                    duration = None
+                if duration is None and PYGAME_AVAILABLE:
+                    try:
+                        duration = pygame.mixer.Sound(fpath).get_length()
+                    except Exception:
+                        duration = None
+                self._arm_external_vault_playback(duration)
                 if platform.system() == "Windows": os.startfile(fpath)
                 elif platform.system() == "Darwin": subprocess.Popen(["open", fpath])
                 else: subprocess.Popen(["xdg-open", fpath])
             except Exception as e:
+                self._set_vault_playback(False)
                 messagebox.showerror("External Player Error", str(e))
 
         tk.Button(hdr, text="↗️ Open in Windows Player", font=("Segoe UI", 8),
@@ -1844,8 +1934,56 @@ class ModernSafetyApp:
         ctrl_frame = tk.Frame(a_dlg, bg=_P["bg_panel"], padx=12, pady=10)
         ctrl_frame.pack(fill="x", side="bottom")
 
-        is_playing = [True]
+        is_playing = [False]
         vis_active = [True]
+        playback_job = [None]
+        playback_deadline = [None]
+        playback_backend = [None]
+
+        def _duration_seconds():
+            try:
+                with wave.open(fpath, "rb") as audio_file:
+                    rate = audio_file.getframerate()
+                    return audio_file.getnframes() / rate if rate else None
+            except Exception:
+                if PYGAME_AVAILABLE:
+                    try:
+                        return pygame.mixer.Sound(fpath).get_length()
+                    except Exception:
+                        pass
+            return None
+
+        duration_seconds = _duration_seconds()
+
+        def _end_playback(message="⏹ Playback stopped"):
+            is_playing[0] = False
+            if playback_job[0] is not None:
+                try:
+                    a_dlg.after_cancel(playback_job[0])
+                except tk.TclError:
+                    pass
+                playback_job[0] = None
+            _stop_audio()
+            if a_dlg.winfo_exists():
+                btn_play.config(text="▶ Play")
+                status_lbl.config(text=message, fg=_P["text_dim"])
+
+        def _watch_playback():
+            playback_job[0] = None
+            if not is_playing[0] or not a_dlg.winfo_exists():
+                return
+            if (playback_deadline[0] is not None
+                    and time.monotonic() >= playback_deadline[0]):
+                _end_playback("✅ Playback finished")
+                return
+            if playback_backend[0] == "pygame" and PYGAME_AVAILABLE and pygame.mixer.get_init():
+                try:
+                    if not pygame.mixer.music.get_busy():
+                        _end_playback("✅ Playback finished")
+                        return
+                except Exception:
+                    pass
+            playback_job[0] = a_dlg.after(150, _watch_playback)
 
         def _animate_vis():
             if not vis_active[0] or not a_dlg.winfo_exists():
@@ -1871,15 +2009,34 @@ class ModernSafetyApp:
         def _start_audio():
             if platform.system() == "Windows" and WINSOUND_AVAILABLE:
                 try:
+                    self._set_vault_playback(True)
                     winsound.PlaySound(fpath, winsound.SND_FILENAME | winsound.SND_ASYNC)
+                    playback_backend[0] = "winsound"
+                    is_playing[0] = True
+                    playback_deadline[0] = (
+                        time.monotonic() + duration_seconds if duration_seconds else None
+                    )
+                    playback_job[0] = a_dlg.after(150, _watch_playback)
+                    return True
                 except Exception as e:
                     print(f"Winsound error: {e}")
             elif PYGAME_AVAILABLE:
                 try:
+                    self._set_vault_playback(True)
                     pygame.mixer.music.load(fpath)
                     pygame.mixer.music.play()
+                    playback_backend[0] = "pygame"
+                    is_playing[0] = True
+                    playback_deadline[0] = (
+                        time.monotonic() + duration_seconds if duration_seconds else None
+                    )
+                    playback_job[0] = a_dlg.after(150, _watch_playback)
+                    return True
                 except Exception as e:
                     print(f"Pygame audio error: {e}")
+            self._set_vault_playback(False)
+            playback_backend[0] = None
+            return False
 
         def _stop_audio():
             if platform.system() == "Windows" and WINSOUND_AVAILABLE:
@@ -1892,6 +2049,15 @@ class ModernSafetyApp:
                     pygame.mixer.music.stop()
                 except Exception:
                     pass
+            if playback_job[0] is not None:
+                try:
+                    a_dlg.after_cancel(playback_job[0])
+                except tk.TclError:
+                    pass
+                playback_job[0] = None
+            playback_deadline[0] = None
+            playback_backend[0] = None
+            self._set_vault_playback(False)
 
         def _toggle_audio():
             if is_playing[0]:
@@ -1900,10 +2066,11 @@ class ModernSafetyApp:
                 btn_play.config(text="▶ Play")
                 status_lbl.config(text="⏸ Paused", fg=_P["text_dim"])
             else:
-                is_playing[0] = True
-                _start_audio()
-                btn_play.config(text="⏹ Stop")
-                status_lbl.config(text="▶ Playing evidence audio...", fg=_P["accent"])
+                if _start_audio():
+                    btn_play.config(text="⏹ Stop")
+                    status_lbl.config(text="▶ Playing evidence audio...", fg=_P["accent"])
+                else:
+                    status_lbl.config(text="⚠️ Unable to play this audio file", fg=_P["red"])
 
         btn_play = tk.Button(ctrl_frame, text="⏹ Stop", font=("Segoe UI", 9, "bold"),
                              bg=_P["accent"], fg=_P["bg_root"], bd=0, cursor="hand2", padx=14, pady=4,
@@ -1917,7 +2084,8 @@ class ModernSafetyApp:
             a_dlg.destroy()
 
         a_dlg.protocol("WM_DELETE_WINDOW", _on_close)
-        _start_audio()
+        if _start_audio():
+            btn_play.config(text="⏹ Stop")
         _animate_vis()
 
     def open_purge_vaults_dialog(self):
@@ -1959,12 +2127,12 @@ class ModernSafetyApp:
         lbl_total.pack(fill="x", pady=(6, 2))
 
         def _refresh_stats():
-            a_files = glob.glob(os.path.join("recordings", "audio", "*.*"))
-            v_files = glob.glob(os.path.join("recordings", "video", "*.*"))
+            a_files = self._vault_files("audio")
+            v_files = self._vault_files("video")
             a_sz = sum(os.path.getsize(f) for f in a_files if os.path.isfile(f))
             v_sz = sum(os.path.getsize(f) for f in v_files if os.path.isfile(f))
-            lbl_audio.config(text=f"🎙️ Audio Vault: {len(a_files)} recordings ({_fmt(a_sz)})")
-            lbl_video.config(text=f"📹 Video Vault: {len(v_files)} recordings ({_fmt(v_sz)})")
+            lbl_audio.config(text=f"🎙️ Audio Vault: {len(a_files)} file(s) ({_fmt(a_sz)})")
+            lbl_video.config(text=f"📹 Video Vault: {len(v_files)} file(s) ({_fmt(v_sz)})")
             lbl_total.config(text=f"📦 Total Evidence: {len(a_files) + len(v_files)} files ({_fmt(a_sz + v_sz)})")
             if hasattr(self, "refresh_media_lists"):
                 threading.Thread(target=self.refresh_media_lists, daemon=True).start()
@@ -1975,38 +2143,42 @@ class ModernSafetyApp:
         btn_box.pack(fill="both", expand=True)
 
         def _delete_audio_all():
-            a_files = glob.glob(os.path.join("recordings", "audio", "*.*"))
+            a_files = self._vault_files("audio")
             if not a_files:
                 messagebox.showinfo("Audio Vault", "No audio recordings found to delete.")
                 return
             if messagebox.askyesno("Delete Audio", f"Permanently delete all {len(a_files)} audio recordings?", icon="warning"):
-                cnt = self.controller.delete_all_recordings("audio") if self.controller else 0
-                if not cnt:
-                    for f in a_files:
-                        try: os.remove(f); cnt += 1
-                        except Exception: pass
-                    if hasattr(self, "controller") and self.controller and hasattr(self.controller, "sync_manager"):
-                        self.controller.sync_manager.clear_audio_queue()
+                cnt = 0
+                for f in a_files:
+                    try:
+                        os.remove(f)
+                        cnt += 1
+                    except Exception as exc:
+                        print(f"[Vault Delete Error] {exc}")
+                if self.controller and hasattr(self.controller, "sync_manager"):
+                    self.controller.sync_manager.clear_audio_queue()
                 _refresh_stats()
                 self.send_desktop_popup("🗑️ Audio Vault Cleared", f"Deleted {cnt} audio file(s).")
 
         def _delete_video_all():
-            v_files = glob.glob(os.path.join("recordings", "video", "*.*"))
+            v_files = self._vault_files("video")
             if not v_files:
                 messagebox.showinfo("Video Vault", "No video recordings found to delete.")
                 return
             if messagebox.askyesno("Delete Video", f"Permanently delete all {len(v_files)} video recordings?", icon="warning"):
-                cnt = self.controller.delete_all_recordings("video") if self.controller else 0
-                if not cnt:
-                    for f in v_files:
-                        try: os.remove(f); cnt += 1
-                        except Exception: pass
+                cnt = 0
+                for f in v_files:
+                    try:
+                        os.remove(f)
+                        cnt += 1
+                    except Exception as exc:
+                        print(f"[Vault Delete Error] {exc}")
                 _refresh_stats()
                 self.send_desktop_popup("🗑️ Video Vault Cleared", f"Deleted {cnt} video file(s).")
 
         def _delete_everything():
-            a_files = glob.glob(os.path.join("recordings", "audio", "*.*"))
-            v_files = glob.glob(os.path.join("recordings", "video", "*.*"))
+            a_files = self._vault_files("audio")
+            v_files = self._vault_files("video")
             total = len(a_files) + len(v_files)
             if total == 0:
                 messagebox.showinfo("Evidence Vault", "No recordings found to delete.")
@@ -2014,14 +2186,15 @@ class ModernSafetyApp:
             if messagebox.askyesno("⚠️ Purge All Evidence",
                                    f"Are you sure you want to permanently DELETE ALL {total} audio and video recordings?\n\nThis cannot be undone!",
                                    icon="warning"):
-                cnt = self.controller.delete_all_recordings("all") if self.controller else 0
-                if not cnt:
-                    for pat in [os.path.join("recordings", "audio", "*.*"), os.path.join("recordings", "video", "*.*")]:
-                        for f in glob.glob(pat):
-                            try: os.remove(f); cnt += 1
-                            except Exception: pass
-                    if hasattr(self, "controller") and self.controller and hasattr(self.controller, "sync_manager"):
-                        self.controller.sync_manager.clear_audio_queue()
+                cnt = 0
+                for f in a_files + v_files:
+                    try:
+                        os.remove(f)
+                        cnt += 1
+                    except Exception as exc:
+                        print(f"[Vault Delete Error] {exc}")
+                if self.controller and hasattr(self.controller, "sync_manager"):
+                    self.controller.sync_manager.clear_audio_queue()
                 _refresh_stats()
                 self.send_desktop_popup("⚠️ Evidence Purged", f"Deleted all {cnt} audio and video recordings.")
 
@@ -2042,8 +2215,8 @@ class ModernSafetyApp:
                   command=dlg.destroy).pack(side="bottom", pady=6)
 
     def refresh_media_lists(self):
-        a_files = glob.glob(os.path.join("recordings", "audio", "*.*"))
-        v_files = glob.glob(os.path.join("recordings", "video", "*.*"))
+        a_files = self._vault_files("audio")
+        v_files = self._vault_files("video")
         a_cnt = len(a_files)
         v_cnt = len(v_files)
 
@@ -2058,9 +2231,9 @@ class ModernSafetyApp:
         def _upd():
             try:
                 if hasattr(self, "a_count_lbl") and self.a_count_lbl.winfo_exists():
-                    self.a_count_lbl.config(text=f"{a_cnt} files ({_fmt(a_sz)})" if a_cnt else "0 files")
+                    self.a_count_lbl.config(text=f"Audio Vault: {a_cnt} file(s)")
                 if hasattr(self, "v_count_lbl") and self.v_count_lbl.winfo_exists():
-                    self.v_count_lbl.config(text=f"{v_cnt} files ({_fmt(v_sz)})" if v_cnt else "0 files")
+                    self.v_count_lbl.config(text=f"Video Vault: {v_cnt} file(s)")
             except Exception:
                 pass
         try:
@@ -2301,8 +2474,8 @@ class ModernSafetyApp:
     def move_user_to_latlon(self, target_lat, target_lon, speed_kmh=None):
         """
         Moves user freely to given coordinates.
-        Calculates realistic velocity and heading angle, passes to safety controller,
-        updates breadcrumb trail, and triggers live route/safety anomaly evaluation.
+        Calculates visual velocity and heading, updates the demo marker and
+        breadcrumb trail. Manual map input is never treated as GPS evidence.
         """
         if not self.demo_mode_active:
             self.demo_mode_active = True
@@ -2327,39 +2500,25 @@ class ModernSafetyApp:
         self._last_move_time = now
 
         if speed_kmh is not None:
-            calc_speed = speed_kmh
+            calc_speed = float(speed_kmh)
         else:
-            default_pace = getattr(self, "demo_speed", 45.0)
-            if d_m > 300:
-                calc_speed = min(88.0, max(default_pace, (d_m / dt) * 3.6))
-            elif d_m > 50:
-                calc_speed = default_pace
-            else:
-                calc_speed = max(5.0, (d_m / dt) * 3.6 if dt < 2.0 else default_pace)
+            # The simulator represents cursor movement as travel. Use each drag
+            # segment's elapsed time so speed responds immediately at every point.
+            calc_speed = min(250.0, max(0.0, (d_m / dt) * 3.6))
 
         self.current_sim_lat = round(target_lat, 6)
         self.current_sim_lon = round(target_lon, 6)
         self.demo_speed = round(calc_speed, 1)
+        print(
+            f"🛰️ [Map Simulator] Lat: {self.current_sim_lat:.6f}, "
+            f"Lon: {self.current_sim_lon:.6f}"
+        )
 
+        # This method is driven by canvas dragging, clicks, and directional UI
+        # controls. Treat it as visual simulator input only; never as GPS data.
         is_threat = False
-        threat_type = "NORMAL"
         if self.controller:
             self.controller.update_demo_position(target_lat, target_lon, speed_kmh=calc_speed)
-            # Evaluate anomaly only when threat screen is not already active
-            if not getattr(self, "is_threat_active", False):
-                if getattr(self, "display_only_mode", False):
-                    # In Display Only mode, evaluate deviation purely for visual display without taking actions
-                    if hasattr(self.controller, "anomaly_engine"):
-                        anomaly_check = self.controller.anomaly_engine.check_for_threats(
-                            calc_speed, target_lat, target_lon
-                        )
-                        if isinstance(anomaly_check, tuple):
-                            is_threat, threat_type = anomaly_check[0], anomaly_check[1]
-                else:
-                    cycle_res = self.controller.run_live_safety_cycle()
-                    if isinstance(cycle_res, dict):
-                        is_threat = cycle_res.get("anomaly_check", {}).get("is_threat", False)
-                        threat_type = cycle_res.get("anomaly_check", {}).get("threat_type", "NORMAL")
 
         nearest_st = self.get_nearest_street_name(target_lat, target_lon)
         self.demo_status_str.set(f"📍 {nearest_st} • ({target_lat:.5f}, {target_lon:.5f})")
@@ -2420,6 +2579,7 @@ class ModernSafetyApp:
 
         # Regular terrain click: freely move user marker to clicked location
         self.is_dragging_user = True
+        self._last_move_time = time.time()
         lat, lon = map_config.pixel_to_latlon(event.x, event.y, (w, h))
         self.move_user_to_latlon(lat, lon)
 
@@ -2565,35 +2725,13 @@ class ModernSafetyApp:
         e_phone.insert(0, self.user_phone)
         e_phone.pack(fill="x", ipady=5, pady=(2, 0))
 
-        # PINs & Timer row
+        # SOS timer row
         sec_row = tk.Frame(frm, bg=_P["bg_panel"])
         sec_row.pack(fill="x", pady=(2, 6))
 
-        # Real PIN col
-        rpin_col = tk.Frame(sec_row, bg=_P["bg_panel"])
-        rpin_col.pack(side="left", fill="x", expand=True, padx=(0, 4))
-        tk.Label(rpin_col, text="REAL DISARM PIN",
-                 font=("Segoe UI", 8, "bold"),
-                 fg=_P["green"], bg=_P["bg_panel"]).pack(anchor="w")
-        e_real_pin = tk.Entry(rpin_col, font=("Segoe UI", 10),
-                              bg=_P["bg_input"], fg=_P["text_hi"], bd=0)
-        e_real_pin.insert(0, getattr(self, "real_pin", "1234"))
-        e_real_pin.pack(fill="x", ipady=5, pady=(2, 0))
-
-        # Duress Fake PIN col
-        fpin_col = tk.Frame(sec_row, bg=_P["bg_panel"])
-        fpin_col.pack(side="left", fill="x", expand=True, padx=4)
-        tk.Label(fpin_col, text="DURESS FAKE PIN",
-                 font=("Segoe UI", 8, "bold"),
-                 fg=_P["red"], bg=_P["bg_panel"]).pack(anchor="w")
-        e_fake_pin = tk.Entry(fpin_col, font=("Segoe UI", 10),
-                              bg=_P["bg_input"], fg=_P["text_hi"], bd=0)
-        e_fake_pin.insert(0, getattr(self, "fake_pin", "9999"))
-        e_fake_pin.pack(fill="x", ipady=5, pady=(2, 0))
-
         # Timer col
         tmr_col = tk.Frame(sec_row, bg=_P["bg_panel"])
-        tmr_col.pack(side="right", fill="x", expand=True, padx=(4, 0))
+        tmr_col.pack(side="left", fill="x", expand=True)
         tk.Label(tmr_col, text="SOS COUNTDOWN",
                  font=("Segoe UI", 8, "bold"),
                  fg=_P["amber"], bg=_P["bg_panel"]).pack(anchor="w")
@@ -2609,10 +2747,10 @@ class ModernSafetyApp:
 
         escl_col = tk.Frame(thresh_row, bg=_P["bg_panel"])
         escl_col.pack(side="left", fill="x", expand=True, padx=(0, 4))
-        tk.Label(escl_col, text="CALL ESCALATION (60-120s)",
+        tk.Label(escl_col, text="CALL RETRY INTERVAL (20-120s)",
                  font=("Segoe UI", 8, "bold"),
                  fg=_P["accent2"], bg=_P["bg_panel"]).pack(anchor="w")
-        spin_escl = tk.Spinbox(escl_col, from_=60, to=120, increment=10,
+        spin_escl = tk.Spinbox(escl_col, from_=20, to=120, increment=10,
                                textvariable=self.escalation_timeout_var,
                                font=("Segoe UI", 10, "bold"),
                                bg=_P["bg_input"], fg=_P["text_hi"], bd=0)
@@ -2816,35 +2954,28 @@ class ModernSafetyApp:
                 messagebox.showerror("Validation Error", "User phone must be a valid 10-digit number.")
                 return
 
-            r_pin = e_real_pin.get().strip()
-            f_pin = e_fake_pin.get().strip()
-            if not r_pin or not f_pin or r_pin == f_pin:
-                messagebox.showerror("PIN Error", "Real PIN and Duress Fake PIN must both be set and must not be identical.")
-                return
-
             try:
                 self.escalation_timeout_s = int(self.escalation_timeout_var.get())
-                self.escalation_timeout_s = max(60, min(120, self.escalation_timeout_s))
+                self.escalation_timeout_s = max(20, min(120, self.escalation_timeout_s))
             except Exception:
                 self.escalation_timeout_s = 60
+            self.escalation_timeout_var.set(self.escalation_timeout_s)
             try:
                 self.speed_threshold_kmh = float(self.speed_threshold_var.get())
             except Exception:
-                self.speed_threshold_kmh = 60.0
+                self.speed_threshold_kmh = 25.0
 
             self.user_name = e_name.get().strip()
             self.user_phone = phone_val
-            self.real_pin = r_pin
-            self.fake_pin = f_pin
-            self.save_user_profile()
             if self.controller:
                 self.controller.set_emergency_contacts(
                     [c["phone"] for c in self.contacts])
-                self.controller.set_pins(self.real_pin, self.fake_pin)
+                self.controller.call_escalation_timeout_sec = self.escalation_timeout_s
                 if hasattr(self.controller, "escalation_manager"):
                     self.controller.escalation_manager.timeout_s = self.escalation_timeout_s
                 if hasattr(self.controller, "anomaly_engine"):
                     self.controller.anomaly_engine.speed_threshold_kmh = self.speed_threshold_kmh
+            self.save_user_profile()
             dlg.destroy()
             self.build_modern_dashboard(
                 pending_notification="⚙️ Settings Updated Successfully!")
@@ -2881,9 +3012,21 @@ class ModernSafetyApp:
     # ═══════════════════════════════════════════════════════════════════════════
 
     def trigger_threat(self, reason_msg="⚠️ CRITICAL THREAT DETECTED ⚠️"):
+        normalized_reason = str(reason_msg or "").strip().lower().replace("_", " ").replace("-", " ")
+        if any(marker in normalized_reason for marker in (
+            "adb disconnected", "usb disconnected", "phone disconnected",
+            "device disconnected", "connection lost", "adb offline",
+            "usb offline", "phone offline",
+        )):
+            print(f"ℹ️ [GUI] Connectivity-only event does not trigger SOS: {reason_msg}")
+            return
+
         now = time.time()
         # Suppress repeated triggers if threat screen is currently open
-        if getattr(self, "is_threat_active", False):
+        if (
+            getattr(self, "is_threat_active", False)
+            or getattr(self, "popup_showing", False)
+        ):
             print(f"ℹ️ [GUI] Threat trigger '{reason_msg}' debounced (threat screen active).")
             return
 
@@ -2898,11 +3041,13 @@ class ModernSafetyApp:
 
         reason_upper = str(reason_msg).upper()
 
-        # The countdown timer should appear ONLY for Fall Detection and Route Deviation.
+        # Route and speed anomalies give the user a short chance to cancel a false alarm.
         is_fall = any(k in reason_upper for k in ["FALL", "DROP", "IMPACT"])
         is_route_dev = any(k in reason_upper for k in ["DEVIATION", "ROUTE", "OFF_ROUTE", "WAYPOINT_DEVIATED"])
+        is_speed_anomaly = any(k in reason_upper for k in ["SPEED", "OVERSPEED", "HIGH_SPEED"])
+        is_combined_anomaly = is_route_dev and is_speed_anomaly
 
-        should_countdown = is_fall or is_route_dev
+        should_countdown = is_fall or is_route_dev or is_speed_anomaly
 
         if not should_countdown:
             # The countdown should not appear when the alert is being dispatched, as it is already identified as an emergency.
@@ -2917,36 +3062,56 @@ class ModernSafetyApp:
             self.is_protection_active = True
 
         self.active_threat_reason = reason_msg
+        self.trigger_emergency_ui_mode(
+            reason=reason_msg,
+            dispatch_status="SOS COUNTDOWN ACTIVE  •  SIREN / ALERT ARMED",
+        )
+        self.mark_emergency_active()
 
-        def _beep():
-            try:
-                import winsound
-                winsound.Beep(1200, 150)
-                winsound.Beep(1600, 150)
-            except Exception:
-                print("\a")
-        threading.Thread(target=_beep, daemon=True).start()
+        self._start_popup_alert_chime()
 
         self.is_threat_active = True
-        self.total_time = self.delay_timer.get()
+        self.alert_active = True
+        self.total_time = 10 if (is_route_dev or is_speed_anomaly) else self.delay_timer.get()
         self.time_left  = self.total_time
 
-        self.clear_container()
+        self.threat_popup = tk.Toplevel(self.root)
+        self.popup_showing = True
+        self.threat_popup.title("Emergency Alert")
+        self.threat_popup.configure(bg=_P["threat_bg"])
+        self.threat_popup.resizable(False, False)
+        self.threat_popup.transient(self.root)
+        self.threat_popup.attributes("-topmost", True)
+        self.threat_popup.protocol("WM_DELETE_WINDOW", lambda: self.dismiss_alarm("User cancelled alert"))
+        popup_width, popup_height = 480, 500
+        self.threat_popup.update_idletasks()
+        x = self.root.winfo_rootx() + max(0, (self.root.winfo_width() - popup_width) // 2)
+        y = self.root.winfo_rooty() + max(0, (self.root.winfo_height() - popup_height) // 2)
+        self.threat_popup.geometry(f"{popup_width}x{popup_height}+{x}+{y}")
 
-        threat_frame = tk.Frame(self.main_container, bg=_P["threat_bg"])
-        threat_frame.pack(fill="both", expand=True)
-
-        center_box = tk.Frame(threat_frame, bg=_P["threat_bg"])
+        center_box = tk.Frame(self.threat_popup, bg=_P["threat_bg"])
         center_box.place(relx=0.5, rely=0.5, anchor="center")
 
         if is_fall:
             hdr_text = "💥 PHONE FALL / DROP DETECTED!"
             sub_text = "Sudden drop / impact detected via mobile phone sensors.\nIf uncancelled, emergency SOS alert will be dispatched to all saved contacts."
             btn_text = "🛡️ I AM SAFE (CANCEL SOS)"
+        elif is_combined_anomaly:
+            hdr_text = "CRITICAL: Speed Anomaly & Route Deviation"
+            sub_text = f"{reason_msg}\nBoth speed and route limits were exceeded.\nIf you do not cancel within 10 seconds, an emergency alert will be dispatched."
+            btn_text = "I'M SAFE (CANCEL SOS)"
+        elif is_route_dev:
+            hdr_text = "Route Deviation Detected"
+            sub_text = f"{reason_msg}\nYou are more than the route safety limit from the planned path.\nIf you do not cancel within 10 seconds, an emergency alert will be dispatched."
+            btn_text = "I'M SAFE (CANCEL SOS)"
+        elif is_speed_anomaly:
+            hdr_text = "Speed Anomaly Detected"
+            sub_text = f"{reason_msg}\nIf you do not cancel within 10 seconds, an emergency alert will be dispatched."
+            btn_text = "CANCEL"
         else:
             hdr_text = "⚠️ ROUTE DEVIATION DETECTED!"
-            sub_text = f"{reason_msg}\nTrip has deviated from planned safe route corridor.\nPlease confirm your safety before countdown expires."
-            btn_text = "🛡️ I AM SAFE (CANCEL SOS)"
+            sub_text = f"{reason_msg}\nTrip has deviated from the planned safe route.\nIf you do not cancel within 10 seconds, an emergency alert will be dispatched."
+            btn_text = "CANCEL"
 
         tk.Label(center_box, text=hdr_text,
                  font=("Segoe UI", 18, "bold"),
@@ -2962,18 +3127,82 @@ class ModernSafetyApp:
         )
         self.timer_canvas.pack(pady=10)
 
+        action_row = tk.Frame(center_box, bg=_P["threat_bg"])
+        action_row.pack(fill="x", pady=18)
         tk.Button(
-            center_box, text=btn_text,
-            font=("Segoe UI", 12, "bold"),
+            action_row, text="CANCEL / SAFE",
+            font=("Segoe UI", 11, "bold"),
             bg=_P["green"], fg="#ffffff", bd=0, cursor="hand2",
-            padx=20, 
-            command=lambda: self.dismiss_alarm("User confirmed safe"),
-        ).pack(fill="x", pady=18, ipady=12)
+            padx=14, command=lambda: self.dismiss_alarm("User confirmed safe"),
+        ).pack(side="left", fill="x", expand=True, ipady=12, padx=(0, 6))
+        tk.Button(
+            action_row, text="CONFIRM EMERGENCY",
+            font=("Segoe UI", 11, "bold"),
+            bg=_P["red"], fg="#ffffff", bd=0, cursor="hand2",
+            padx=14, command=self.dispatch_sos,
+        ).pack(side="right", fill="x", expand=True, ipady=12, padx=(6, 0))
+
+        self.threat_popup.grab_set()
+        self.threat_popup.focus_force()
 
         if self.controller:
             self.controller.start_emergency_recording()
 
         self.run_timer()
+
+    def execute_adb_sos_workflow(self):
+        phone_numbers = []
+        if hasattr(self, 'controller') and hasattr(self.controller, 'get_emergency_contacts'):
+            phone_numbers = self.controller.get_emergency_contacts()
+        elif hasattr(self, 'contacts'):
+            phone_numbers = self.contacts
+
+        if not phone_numbers:
+            print("No emergency contacts found!")
+            return
+
+        location_link = ""
+        if hasattr(self, 'controller') and hasattr(self.controller, 'get_current_location_link'):
+            location_link = self.controller.get_current_location_link()
+        elif hasattr(self, 'location_module') and hasattr(self.location_module, 'get_current_url'):
+            location_link = self.location_module.get_current_url()
+        elif hasattr(self, 'current_location_url'):
+            location_link = self.current_location_url
+        elif self.controller and hasattr(self.controller, "location_engine"):
+            loc = self.controller.location_engine.get_current_location()
+            lat, lon = loc.get("latitude", 0.0), loc.get("longitude", 0.0)
+            location_link = f"https://maps.google.com/?q={lat},{lon}"
+
+        message = (
+            "🚨 AURA SOS EMERGENCY ALERT! 🚨\n"
+            "User in danger !!!\n"
+            f"Live Location:\n{location_link}"
+        )
+        dispatcher = getattr(self.controller, "usb_dispatcher", None) if self.controller else None
+        if dispatcher is None:
+            print("❌ [SOS] ADB dispatcher unavailable; unable to send SMS or calls.")
+            return
+
+        def _dispatch_in_background():
+            lat = lon = 0.0
+            if self.controller and hasattr(self.controller, "location_engine"):
+                current = self.controller.location_engine.get_current_location()
+                lat = current.get("latitude", 0.0)
+                lon = current.get("longitude", 0.0)
+            results = dispatcher.dispatch_threat_alert(
+                phone_numbers, lat, lon, message_text=message
+            )
+            if self.controller and hasattr(self.controller, "start_call_escalation"):
+                self.controller._call_escalation_deadline = (
+                    results.get("sms_completed_at", time.monotonic())
+                )
+                self.controller.start_call_escalation(phone_numbers, "MANUAL_SOS")
+
+        threading.Thread(
+            target=_dispatch_in_background,
+            name="AURA-legacy-sos-dispatch",
+            daemon=True,
+        ).start()
 
     def draw_circular_timer(self):
         self.timer_canvas.delete("all")
@@ -3017,33 +3246,224 @@ class ModernSafetyApp:
                 self.timer_job = self.root.after(1000, self.run_timer)
 
     def dismiss_alarm(self, reason):
-        if not self.is_protection_active:
-            return
-        self.is_threat_active = False
-        self._last_threat_reason = ""
-        self._last_threat_trigger_time = 0.0
-        if self.timer_job:
-            self.root.after_cancel(self.timer_job)
-            self.timer_job = None
+        was_active = bool(
+            getattr(self, "is_emergency_active", False)
+            or getattr(self, "is_threat_active", False)
+            or getattr(self, "_emergency_banner_frame", None)
+        )
+        self.reset_emergency_ui_state()
 
         # Reset controller status & apply cooldown to prevent unwanted repeated triggers
         if self.controller:
             if hasattr(self.controller, "acknowledge_user_safe"):
-                self.controller.acknowledge_user_safe(cooldown_seconds=90.0)
+                # Safe/cancel closes this incident and immediately re-arms
+                # monitoring; the anomaly engine still requires fresh samples.
+                self.controller.acknowledge_user_safe(cooldown_seconds=0.0)
             elif hasattr(self.controller, "anomaly_engine"):
-                self.controller.anomaly_engine.acknowledge_safe(cooldown_seconds=90.0)
+                self.controller.anomaly_engine.acknowledge_safe(cooldown_seconds=0.0)
             if hasattr(self.controller, "cancel_call_escalation"):
                 self.controller.cancel_call_escalation()
 
-        self.send_desktop_popup("✅ Alarm Dismissed", "User confirmed safe.")
-        self.build_modern_dashboard(
-            pending_notification=f"✅ Alarm Dismissed! ({reason})")
+        if was_active and self.is_protection_active:
+            self.send_desktop_popup("✅ Alarm Dismissed", "User confirmed safe.")
+        print(f"✅ [GUI] Emergency countdown cancelled: {reason}")
+
+    def mark_emergency_active(self):
+        global is_emergency_active
+        is_emergency_active = True
+        self.is_emergency_active = True
+        if self.controller:
+            self.controller.is_emergency_active = True
+        # Marking can originate on the Vosk worker thread; always marshal Tk
+        # changes onto the UI loop.
+        try:
+            if threading.current_thread() is threading.main_thread():
+                self.trigger_emergency_ui_mode()
+            else:
+                self.root.after(0, self.trigger_emergency_ui_mode)
+        except (tk.TclError, RuntimeError):
+            pass
+
+    def trigger_emergency_ui_mode(self, reason=None, dispatch_status=None):
+        """Show a persistent, flashing SOS state without blocking map updates."""
+        if reason:
+            self.active_threat_reason = str(reason)
+        reason_text = self.active_threat_reason or "Emergency alert activated"
+        status_text = dispatch_status or "SIREN / ALERT ACTIVE  •  CONTACTING EMERGENCY CONTACTS"
+        if hasattr(self, "_tele_threat"):
+            self._tele_threat.set("🚨 SOS ACTIVE • SIREN")
+        threat_label = getattr(self, "_tele_threat_label", None)
+        if threat_label is not None and threat_label.winfo_exists():
+            threat_label.configure(fg=_P["red"])
+
+        overlay = getattr(self, "_emergency_overlay", None)
+        if overlay is None or not overlay.winfo_exists():
+            overlay = tk.Frame(self.main_container, bg="#7f1d1d",
+                               highlightbackground="#ef4444", highlightthickness=2)
+            overlay.place(relx=0.5, y=8, anchor="n", relwidth=0.72)
+            self._emergency_overlay = overlay
+            self._emergency_overlay_reason = tk.StringVar(value="")
+            self._emergency_overlay_status = tk.StringVar(value="")
+            tk.Label(overlay, text="🚨  EMERGENCY ALERT ACTIVE  🚨",
+                     font=("Segoe UI", 15, "bold"), fg="#ffffff",
+                     bg="#7f1d1d").pack(pady=(6, 1))
+            tk.Label(overlay, textvariable=self._emergency_overlay_reason,
+                     font=("Segoe UI", 9, "bold"), fg="#fee2e2",
+                     bg="#7f1d1d").pack()
+            tk.Label(overlay, textvariable=self._emergency_overlay_status,
+                     font=("Segoe UI", 9, "bold"), fg="#fde68a",
+                     bg="#7f1d1d").pack(pady=(1, 6))
+
+        self._emergency_overlay_reason.set(reason_text)
+        self._emergency_overlay_status.set(status_text)
+        self._emergency_flash_on = False
+        if self._emergency_flash_job:
+            try:
+                self.root.after_cancel(self._emergency_flash_job)
+            except tk.TclError:
+                pass
+            self._emergency_flash_job = None
+        self._flash_emergency_overlay()
+
+    def _flash_emergency_overlay(self):
+        overlay = getattr(self, "_emergency_overlay", None)
+        if not self.is_emergency_active or overlay is None or not overlay.winfo_exists():
+            return
+        self._emergency_flash_on = not self._emergency_flash_on
+        color = "#b91c1c" if self._emergency_flash_on else "#7f1d1d"
+        try:
+            overlay.configure(bg=color)
+            for child in overlay.winfo_children():
+                child.configure(bg=color)
+        except tk.TclError:
+            return
+        self._emergency_flash_job = self.root.after(500, self._flash_emergency_overlay)
+
+    def clear_emergency_banner(self):
+        if self._emergency_flash_job:
+            try:
+                self.root.after_cancel(self._emergency_flash_job)
+            except tk.TclError:
+                pass
+            self._emergency_flash_job = None
+        overlay = getattr(self, "_emergency_overlay", None)
+        self._emergency_overlay = None
+        if overlay is not None:
+            try:
+                if overlay.winfo_exists():
+                    overlay.destroy()
+            except tk.TclError:
+                pass
+        banner = getattr(self, "_emergency_banner_frame", None)
+        self._emergency_banner_frame = None
+        if banner is not None:
+            try:
+                if banner.winfo_exists():
+                    banner.destroy()
+            except tk.TclError:
+                pass
+
+    def _start_popup_alert_chime(self):
+        """Run a cancellable alert chime without blocking Tk or map updates."""
+        self._popup_chime_stop.set()
+        stop_event = threading.Event()
+        self._popup_chime_stop = stop_event
+
+        def _play():
+            if not WINSOUND_AVAILABLE:
+                while not stop_event.is_set():
+                    print("\a", end="", flush=True)
+                    if stop_event.wait(1.4):
+                        break
+                return
+            while not stop_event.is_set():
+                try:
+                    winsound.Beep(1200, 100)
+                    if stop_event.is_set():
+                        break
+                    winsound.Beep(1600, 110)
+                except Exception as exc:
+                    print(f"⚠️ [Alert Chime] Playback failed: {exc}")
+                    break
+                if stop_event.wait(1.2):
+                    break
+
+        threading.Thread(target=_play, name="AURA-popup-alert-chime", daemon=True).start()
+
+    def _stop_popup_alert_chime(self):
+        event = getattr(self, "_popup_chime_stop", None)
+        if event is not None:
+            event.set()
+
+    def reset_emergency_ui_state(self):
+        """Clear all emergency UI state and any active map safety countdown."""
+        self._stop_popup_alert_chime()
+        global is_emergency_active
+        is_emergency_active = False
+        self.is_emergency_active = False
+        if self.controller:
+            self.controller.is_emergency_active = False
+        self.is_threat_active = False
+        self.alert_active = False
+        self.popup_showing = False
+        self.active_threat_reason = ""
+        self._last_threat_reason = ""
+        self._last_threat_trigger_time = 0.0
+        self._last_sos_dispatch_time = 0.0
+        if self.timer_job:
+            try:
+                self.root.after_cancel(self.timer_job)
+            except tk.TclError:
+                pass
+            self.timer_job = None
+        self._close_threat_popup()
+        self.clear_emergency_banner()
+        if hasattr(self, "_tele_threat"):
+            self._tele_threat.set("● MONITORING")
+        threat_label = getattr(self, "_tele_threat_label", None)
+        if threat_label is not None:
+            try:
+                threat_label.configure(fg=_P["green"])
+            except tk.TclError:
+                pass
+
+        sim = getattr(self.controller, "map_simulator_window", None) if self.controller else None
+        if sim is not None:
+            if sim.safety_popup is not None:
+                sim._close_safety_popup()
+            sim._sos_active = False
+            sim.safety_monitor.sos_active = False
+            sim.safety_monitor.resolve(0.0)
+            sim.safety_reason = ""
+            if "safety_status" in sim._tele_vars:
+                sim._tele_vars["safety_status"].set("OK")
+            sim._draw_map()
+
+    def _close_threat_popup(self):
+        self._stop_popup_alert_chime()
+        # Also reset these flags on timer expiry / SOS dispatch, where the
+        # popup closes but the separate emergency-dispatch state stays active.
+        self.alert_active = False
+        self.popup_showing = False
+        popup = getattr(self, "threat_popup", None)
+        if popup is not None:
+            try:
+                if popup.winfo_exists():
+                    popup.grab_release()
+                    popup.destroy()
+            except tk.TclError:
+                pass
+        self.threat_popup = None
+        self.timer_canvas = None
 
     def dispatch_sos(self):
         """
         Core SOS dispatch. The countdown does not appear as it is already identified as an emergency.
         Gathers ALL numbers saved in the UI and dispatches offline alert with current location link.
         """
+        # The popup tone is tied to countdown lifetime, even if dispatch is
+        # disabled or suppressed by the duplicate-dispatch cooldown.
+        self._stop_popup_alert_chime()
         if not self.is_protection_active:
             return
 
@@ -3058,6 +3478,7 @@ class ModernSafetyApp:
         if self.timer_job:
             self.root.after_cancel(self.timer_job)
             self.timer_job = None
+        self._close_threat_popup()
 
         # --- Resolve all numbers saved in the UI ---
         def _read_entry(entry_widget, fallback=""):
@@ -3096,6 +3517,12 @@ class ModernSafetyApp:
         if not saved_numbers:
             saved_numbers = ["9876543210"]
 
+        self.mark_emergency_active()
+        self.trigger_emergency_ui_mode(
+            reason=getattr(self, "active_threat_reason", "SOS activated"),
+            dispatch_status="SIREN ACTIVE  •  DISPATCH IN PROGRESS",
+        )
+
         if self.controller:
             self.controller.set_emergency_contacts(saved_numbers)
 
@@ -3105,19 +3532,29 @@ class ModernSafetyApp:
             try:
                 current_loc = self.controller.location_engine.get_current_location()
                 incident_desc = getattr(self, "active_threat_reason", "MANUAL_SOS_TRIGGER")
-                self.controller.execute_emergency_sequence(
-                    incident_desc, current_loc)
+                # SMS and calls can take several seconds; perform the dispatch
+                # workflow away from Tk so the dashboard remains responsive.
+                threading.Thread(
+                    target=self.controller.execute_emergency_sequence,
+                    args=(incident_desc, current_loc),
+                    kwargs={"adb_sms": True, "immediate_calls": False},
+                    daemon=True,
+                    name="AURA-confirmed-emergency-dispatch",
+                ).start()
             except Exception as e:
                 print(f"[SOS Dispatch Error] {e}")
         else:
-            p1_n = saved_numbers[0] if saved_numbers else ""
-            p2_n = saved_numbers[1] if len(saved_numbers) > 1 else ""
-            threading.Thread(
-                target=trigger_aura_sos,
-                args=(p1_n, p2_n, 0.0, 0.0),
-                daemon=True,
-                name="SOS-Dispatch",
-            ).start()
+            # --- USB / Termux Emergency Dispatch Fallback ---
+            lat = current_loc.get("lat", 11.488) if isinstance(current_loc, dict) else 11.488
+            lon = current_loc.get("lon", 79.753) if isinstance(current_loc, dict) else 79.753
+
+            if hasattr(self.controller, "usb_dispatcher"):
+                threading.Thread(
+                    target=self.controller.usb_dispatcher.dispatch_threat_alert,
+                    args=(saved_numbers, lat, lon),
+                    daemon=True,
+                    name="USB-SOS-Dispatch"
+                ).start()
 
         # --- UI feedback: show dispatched dashboard directly without countdown ---
         if not getattr(self, "is_fake_shutdown", False):
@@ -3125,18 +3562,22 @@ class ModernSafetyApp:
             if len(saved_numbers) > 3:
                 contact_str += f" (+{len(saved_numbers)-3} more)"
             self.send_desktop_popup(
-                "🚨 INSTANT SOS DISPATCHED!",
-                f"Emergency alert with location link dispatched to: {contact_str}")
+                "🚨 EMERGENCY DISPATCH STARTED",
+                f"Background SMS and priority call attempts started for: {contact_str}")
             self.build_modern_dashboard(
-                pending_notification=f"🚨 EMERGENCY ALERT DISPATCHED TO {len(saved_numbers)} CONTACTS!",
+                pending_notification=f"🚨 EMERGENCY DISPATCH STARTED FOR {len(saved_numbers)} CONTACT(S)",
                 is_error=True)
+            self.trigger_emergency_ui_mode(
+                reason=getattr(self, "active_threat_reason", "Emergency alert dispatched"),
+                dispatch_status=f"DISPATCH STARTED  •  SENDING TO {len(saved_numbers)} CONTACT(S)",
+            )
             self.root.after(
                 5000,
                 lambda: threading.Thread(
                     target=self.refresh_media_lists, daemon=True).start())
 
     # ═══════════════════════════════════════════════════════════════════════════
-    # 8 – FAKE SHUTDOWN (F8 / duress)
+    # 8 – FAKE SHUTDOWN DEMO (F8)
     # ═══════════════════════════════════════════════════════════════════════════
 
     def trigger_fake_shutdown(self, event=None):
@@ -3191,8 +3632,26 @@ class ModernSafetyApp:
             return
         if action == "TRIGGER":
             self.root.after(0, self.trigger_threat)
-        elif action == "CANCEL" and self.is_threat_active:
-            self.root.after(0, lambda: self.dismiss_alarm(f"Voice ('{word}')"))
+        elif action == "CANCEL":
+            self.root.after(0, lambda: self._handle_voice_cancel(word))
+
+    def cancel_active_safety_check(self, reason="User confirmed safe"):
+        """Close the Map Simulator safety modal and resolve its countdown."""
+        sim = getattr(self.controller, "map_simulator_window", None) if self.controller else None
+        if sim is None or not sim._safety_popup_is_open():
+            return False
+        sim._cancel_safety_check()
+        print(f"✅ [GUI] Safety Check dismissed: {reason}")
+        return True
+
+    def _handle_voice_cancel(self, word):
+        reason = f"Voice ('{word}')"
+        if self.cancel_active_safety_check(reason):
+            return
+        if self.is_threat_active:
+            self.dismiss_alarm(reason)
+        elif self.controller and hasattr(self.controller, "acknowledge_user_safe"):
+            self.controller.acknowledge_user_safe()
 
     # ═══════════════════════════════════════════════════════════════════════════
     # 10 – REALISTIC VECTOR MAP RENDERING & DYNAMIC NAVIGATION HUD
@@ -3353,26 +3812,19 @@ class ModernSafetyApp:
 
     def _draw_safe_route_corridor(self, sz):
         self.map_canvas.delete("route_corridor")
-        dest = getattr(self.controller, "trip_destination", None) if self.controller else None
-        if dest and dest.get("latitude") and dest.get("longitude"):
-            dest_lat = dest["latitude"]
-            dest_lon = dest["longitude"]
-            dest_name = dest.get("name", "Destination")
-        else:
-            dest_lat = 11.49250
-            dest_lon = 79.75800
-            dest_name = "Campus Sanctuary"
+        corridor_pts = self._get_safe_route_corridor_points()
+        if self.controller and hasattr(self.controller, "anomaly_engine"):
+            dense_route = []
+            for start, end in zip(corridor_pts, corridor_pts[1:]):
+                for step in range(25):
+                    fraction = step / 25
+                    dense_route.append((
+                        start[0] + (end[0] - start[0]) * fraction,
+                        start[1] + (end[1] - start[1]) * fraction,
+                    ))
+            dense_route.append(corridor_pts[-1])
+            self.controller.anomaly_engine.set_planned_route(dense_route)
 
-        start_lat = 11.45800
-        start_lon = 79.72000
-
-        corridor_pts = [
-            (start_lat, start_lon),
-            (11.46200, 79.72500),
-            (11.47500, 79.73800),
-            (11.48500, 79.75000),
-            (dest_lat, dest_lon)
-        ]
         corr_pixels = [map_config.latlon_to_pixel(lat, lon, sz) for lat, lon in corridor_pts]
         flat_corr = [coord for pt in corr_pixels for coord in pt]
 
@@ -3389,8 +3841,30 @@ class ModernSafetyApp:
 
         # 4. Destination Flag Marker
         dx, dy = corr_pixels[-1]
+        dest = getattr(self.controller, "trip_destination", None) if self.controller else None
+        dest_name = dest.get("name", "Campus Sanctuary") if dest else "Campus Sanctuary"
         self.map_canvas.create_oval(dx - 9, dy - 9, dx + 9, dy + 9, fill="#a855f7", outline="#ffffff", width=2, tags="route_corridor")
         self.map_canvas.create_text(dx, dy - 16, text=f"🏁 {dest_name}", fill="#e9d5ff", font=("Segoe UI", 8, "bold"), tags="route_corridor")
+
+    def _get_safe_route_corridor_points(self):
+        dest = getattr(self.controller, "trip_destination", None) if self.controller else None
+        if dest and dest.get("latitude") and dest.get("longitude"):
+            dest_lat = dest["latitude"]
+            dest_lon = dest["longitude"]
+        else:
+            dest_lat = 11.49250
+            dest_lon = 79.75800
+
+        start_lat = 11.45800
+        start_lon = 79.72000
+
+        return [
+            (start_lat, start_lon),
+            (11.46200, 79.72500),
+            (11.47500, 79.73800),
+            (11.48500, 79.75000),
+            (dest_lat, dest_lon)
+        ]
 
     def _draw_canvas_dpad(self, w, h):
         self.map_canvas.delete("dpad")

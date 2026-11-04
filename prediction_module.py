@@ -6,6 +6,11 @@ import csv
 import numpy as np
 from datetime import datetime
 
+try:
+    import map_config
+except Exception:
+    map_config = None
+
 # ── Persistence paths ─────────────────────────────────────────────────────────
 _DATA_DIR          = "data"
 _HISTORY_FILE      = os.path.join(_DATA_DIR, "location_history.json")
@@ -345,3 +350,64 @@ class LSTMTrajectoryPredictor:
         self._timestamps.clear()
         self._cumulative_dist_km = 0.0
         self._last_segment_m     = 0.0
+
+    def predict_next_waypoint(self, lat: float = None, lon: float = None, corridor=None) -> dict | None:
+        """
+        Predicts the next corridor waypoint ahead of the current position and
+        prints a continuous live log to the terminal.
+        """
+        if lat is None or lon is None:
+            if self._lats:
+                lat, lon = self._lats[-1], self._lons[-1]
+            else:
+                pred = self.predict_next_coordinate()
+                return pred
+
+        self.update_history(lat, lon)
+        seq = self.predict_next_coordinate()
+
+        pts = list(corridor) if corridor else []
+        if not pts and map_config is not None:
+            try:
+                pts = list(map_config.get_primary_corridor())
+            except Exception:
+                pts = []
+
+        next_wp = None
+        if pts:
+            best_i = 0
+            best_d = float("inf")
+            for i, (wlat, wlon) in enumerate(pts):
+                d = _haversine_m(lat, lon, wlat, wlon)
+                if d < best_d:
+                    best_d = d
+                    best_i = i
+            nxt = min(best_i + 1, len(pts) - 1)
+            next_wp = pts[nxt]
+            # If already past last, hold destination
+            if best_i >= len(pts) - 1:
+                next_wp = pts[-1]
+
+        if next_wp:
+            conf = seq.get("confidence", 0.55) if seq else 0.55
+            # Boost confidence when locked to named corridor
+            conf = min(0.99, max(conf, 0.62))
+            result = {
+                "predicted_latitude": round(next_wp[0], 7),
+                "predicted_longitude": round(next_wp[1], 7),
+                "confidence": round(conf, 3),
+                "prediction_mode": "CORRIDOR_NEXT_WAYPOINT",
+                "segment_distance_m": round(self._last_segment_m, 2),
+                "cumulative_distance_km": round(self._cumulative_dist_km, 4),
+            }
+        else:
+            result = seq
+
+        if result:
+            conf_pct = float(result.get("confidence", 0.0)) * 100.0
+            print(
+                f"[Prediction Engine] Next Waypoint: "
+                f"{result.get('predicted_latitude')}, {result.get('predicted_longitude')} "
+                f"| Confidence: {conf_pct:.1f}%"
+            )
+        return result

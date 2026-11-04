@@ -1,1 +1,3332 @@
-[]
+[
+  {
+    "timestamp": "2026-09-30T14:28:36.353868",
+    "latitude": 11.4615,
+    "longitude": 79.7271,
+    "event": "\u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: \u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-09-30T14:28:36.367008",
+    "latitude": 11.4615,
+    "longitude": 79.7271,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-09-30T14:29:38.274853",
+    "latitude": 11.4615,
+    "longitude": 79.7271,
+    "event": "HOTSPOT_RECONNECTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Network connection to gateway restored",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-09-30T14:29:39.285953",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "CALL_ESCALATION_EXECUTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "{'p1_number': '7358347482', 'p1_status': 'FAILED_NO_ADB_CONNECTION', 'p2_number': '', 'p2_status': 'NOT_ATTEMPTED', 'active_intent': None, 'restrictions_encountered': ['ADB_DEVICE_NOT_CONNECTED'], 'call_history': []}",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-09-30T14:30:14.306807",
+    "latitude": 11.4615,
+    "longitude": 79.7271,
+    "event": "\u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: \u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-09-30T14:30:14.316890",
+    "latitude": 11.4615,
+    "longitude": 79.7271,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-09-30T14:31:17.137776",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "CALL_ESCALATION_EXECUTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "{'p1_number': '7358347482', 'p1_status': 'FAILED_NO_ADB_CONNECTION', 'p2_number': '', 'p2_status': 'NOT_ATTEMPTED', 'active_intent': None, 'restrictions_encountered': ['ADB_DEVICE_NOT_CONNECTED'], 'call_history': []}",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-09-30T14:48:02.076804",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-09-30T16:37:45.514124",
+    "latitude": 11.4615,
+    "longitude": 79.7271,
+    "event": "HOTSPOT_RECONNECTED",
+    "status": "ACTIVE_MONITORING",
+    "details": "Network connection to gateway restored",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-09-30T19:28:47.800225",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "DESTINATION_CLEARED",
+    "status": "ACTIVE_MONITORING",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-09-30T19:45:55.633117",
+    "latitude": 11.4615,
+    "longitude": 79.7271,
+    "event": "\u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: \u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-09-30T19:45:55.677259",
+    "latitude": 11.4615,
+    "longitude": 79.7271,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-09-30T19:48:01.715418",
+    "latitude": 11.4615,
+    "longitude": 79.7271,
+    "event": "HOTSPOT_RECONNECTED",
+    "status": "ACTIVE_MONITORING",
+    "details": "Network connection to gateway restored",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-09-30T19:48:54.223226",
+    "latitude": 11.4615,
+    "longitude": 79.7271,
+    "event": "\u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: \u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-09-30T19:48:54.284433",
+    "latitude": 11.4615,
+    "longitude": 79.7271,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-09-30T19:49:30.199372",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-09-30T19:50:47.859258",
+    "latitude": 11.4615,
+    "longitude": 79.7271,
+    "event": "\u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: \u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-09-30T19:50:47.886721",
+    "latitude": 11.4615,
+    "longitude": 79.7271,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-09-30T19:51:50.827548",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "CALL_ESCALATION_EXECUTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "{'p1_number': '9805673241', 'p1_status': 'FAILED_NO_ADB_CONNECTION', 'p2_number': '7586903214', 'p2_status': 'NOT_ATTEMPTED', 'active_intent': None, 'restrictions_encountered': ['ADB_DEVICE_NOT_CONNECTED'], 'call_history': []}",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-09-30T19:52:11.170635",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-02T20:24:00.987759",
+    "latitude": 11.490505,
+    "longitude": 79.763768,
+    "event": "\u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: \u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-02T20:24:00.991772",
+    "latitude": 11.490505,
+    "longitude": 79.763768,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-02T20:24:13.941770",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-03T00:00:31.912730",
+    "latitude": 11.389365,
+    "longitude": 79.814923,
+    "event": "\u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: \u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-03T00:00:31.944846",
+    "latitude": 11.389365,
+    "longitude": 79.814923,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-03T00:00:40.071611",
+    "latitude": 11.389365,
+    "longitude": 79.814923,
+    "event": "HOTSPOT_DISCONNECTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Network connection to gateway timed out",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-03T00:02:29.055407",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-03T00:02:29.385944",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-03T21:49:28.126337",
+    "latitude": 11.48896,
+    "longitude": 79.75388,
+    "event": "DESTINATION_SET",
+    "status": "ACTIVE_MONITORING",
+    "details": "Target: Home",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-03T21:49:30.360473",
+    "latitude": 11.445,
+    "longitude": 79.708,
+    "event": "DESTINATION_SET",
+    "status": "ACTIVE_MONITORING",
+    "details": "Target: Metro",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-03T21:49:31.932401",
+    "latitude": 11.4925,
+    "longitude": 79.758,
+    "event": "DESTINATION_SET",
+    "status": "ACTIVE_MONITORING",
+    "details": "Target: Campus",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-03T21:49:36.747160",
+    "latitude": 11.468,
+    "longitude": 79.712,
+    "event": "DESTINATION_SET",
+    "status": "ACTIVE_MONITORING",
+    "details": "Target: Police",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-03T21:50:12.968141",
+    "latitude": 11.468,
+    "longitude": 79.712,
+    "event": "DESTINATION_SET",
+    "status": "ACTIVE_MONITORING",
+    "details": "Target: Police",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-03T21:50:25.536688",
+    "latitude": 11.468,
+    "longitude": 79.712,
+    "event": "DESTINATION_SET",
+    "status": "ACTIVE_MONITORING",
+    "details": "Target: Police",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-03T21:50:28.005689",
+    "latitude": 11.48896,
+    "longitude": 79.75388,
+    "event": "DESTINATION_SET",
+    "status": "ACTIVE_MONITORING",
+    "details": "Target: Home",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T00:23:29.567693",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "HOTSPOT_DISCONNECTED",
+    "status": "ACTIVE_MONITORING",
+    "details": "Network connection to gateway timed out",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T00:24:02.085486",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "\u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: \u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T00:24:02.116491",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T00:24:48.140460",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T12:18:32.008750",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "\u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: \u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T12:18:32.045965",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T12:19:20.032077",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T14:58:27.930725",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "ACTIVE_MONITORING",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T14:58:32.500427",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T14:58:40.319260",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "ACTIVE_MONITORING",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T14:58:43.904616",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T15:26:42.462734",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "\ud83d\udea8 MANUAL SOS (MISSION CONTROL MAP)",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: \ud83d\udea8 MANUAL SOS (MISSION CONTROL MAP)",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T15:26:42.478546",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T15:27:07.302404",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T15:51:10.181665",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_HELP",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_HELP",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T15:51:10.216098",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T16:16:53.679301",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T16:17:21.803979",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T16:17:52.254817",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T16:18:14.316133",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "\ud83d\udea8 MANUAL SOS (MISSION CONTROL MAP)",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: \ud83d\udea8 MANUAL SOS (MISSION CONTROL MAP)",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T16:18:14.324232",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T16:19:18.579783",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "CALL_ESCALATION_EXECUTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "{'p1_status': 'UNAVAILABLE', 'p2_status': 'NOT_ATTEMPTED'}",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T16:28:56.528923",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_HELP",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_HELP",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T16:28:56.554809",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T16:30:00.649841",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "CALL_ESCALATION_EXECUTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "{'p1_status': 'UNAVAILABLE', 'p2_status': 'NOT_ATTEMPTED'}",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T16:30:22.109917",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T16:30:23.916629",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T16:30:25.588161",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T16:30:27.280782",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T16:30:27.996898",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T16:30:28.510995",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T16:30:36.214159",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T16:30:39.562324",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T16:30:40.028986",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T16:30:40.401119",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T16:30:41.731071",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T16:31:07.033324",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T16:31:09.840835",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T17:14:57.825850",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "\ud83d\udea8 MANUAL SOS (MISSION CONTROL MAP)",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: \ud83d\udea8 MANUAL SOS (MISSION CONTROL MAP)",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T17:14:57.837785",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T17:16:01.999555",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "CALL_ESCALATION_EXECUTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "{'p1_status': 'UNAVAILABLE', 'p2_status': 'NOT_ATTEMPTED'}",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T17:17:01.362546",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T17:17:01.816388",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T17:17:02.113421",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T17:17:02.574498",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T17:18:22.079603",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "\u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: \u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T17:18:22.092884",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T17:18:36.962242",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T17:18:49.648972",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T17:20:22.438683",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "\ud83d\udca5 HARD FALL / DROP DETECTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: \ud83d\udca5 HARD FALL / DROP DETECTED",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T17:20:22.450769",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T17:21:00.031237",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T17:21:00.427997",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T17:21:06.104403",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T17:31:12.153140",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T18:04:45.696575",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "HOTSPOT_DISCONNECTED",
+    "status": "ACTIVE_MONITORING",
+    "details": "Network connection to gateway timed out",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T18:05:23.819912",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_HELP",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_HELP",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T18:05:23.840595",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T18:06:29.991499",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T18:07:01.483385",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_HELP",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_HELP",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T18:07:01.496701",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T18:07:11.008165",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T18:07:24.485629",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T18:10:18.874288",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T18:28:57.978235",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T18:29:20.525091",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T18:31:42.890121",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "\u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: \u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T18:31:42.897364",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T18:32:02.823401",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T18:37:46.320362",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "\u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: \u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T18:37:46.327574",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T18:40:40.439988",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "HOTSPOT_DISCONNECTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Network connection to gateway timed out",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T18:44:38.679994",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "HOTSPOT_DISCONNECTED",
+    "status": "ACTIVE_MONITORING",
+    "details": "Network connection to gateway timed out",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T19:55:49.392415",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_HELP",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_HELP",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T19:55:49.413362",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T19:56:58.896184",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_HELP",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_HELP",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T19:56:58.908038",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T20:00:05.775553",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: ",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T20:00:05.786522",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T20:44:00.682251",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "\ud83d\udea8 MANUAL SOS (MISSION CONTROL MAP)",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: \ud83d\udea8 MANUAL SOS (MISSION CONTROL MAP)",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T20:44:20.733459",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T20:44:23.515503",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "HOTSPOT_DISCONNECTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Network connection to gateway timed out",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T20:45:40.776941",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "CALL_ESCALATION_EXECUTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "{'p1_status': 'UNAVAILABLE', 'p2_status': 'UNAVAILABLE'}",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T20:46:02.465936",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T20:48:09.850762",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_HELP",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_HELP",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T20:48:09.865081",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T20:48:13.821240",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T22:32:38.321537",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T22:51:43.940683",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_HELP",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_HELP",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T22:51:43.996262",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T22:51:55.467938",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T22:53:24.739306",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T22:53:51.281818",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T23:17:25.011014",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T23:18:04.163225",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_HELP",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_HELP",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T23:18:04.202046",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T23:18:19.218741",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T23:18:54.609867",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_HELP",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_HELP",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T23:18:54.631436",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T23:19:44.933543",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T23:35:11.589536",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "HOTSPOT_DISCONNECTED",
+    "status": "ACTIVE_MONITORING",
+    "details": "Network connection to gateway timed out",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T23:36:04.769493",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "HOTSPOT_RECONNECTED",
+    "status": "ACTIVE_MONITORING",
+    "details": "Network connection to gateway restored",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T23:36:17.172722",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_HELP",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_HELP",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T23:36:17.519467",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T23:38:03.312446",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "CALL_ESCALATION_EXECUTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "{'p1_status': 'UNANSWERED', 'p2_status': 'DISPATCHED'}",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T23:38:21.253433",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-04T23:44:59.430333",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "HOTSPOT_DISCONNECTED",
+    "status": "ACTIVE_MONITORING",
+    "details": "Network connection to gateway timed out",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T00:12:39.094277",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T00:12:52.907956",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T00:13:06.519000",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T00:13:13.721305",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T00:13:20.914478",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T00:30:04.778551",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T00:30:08.453506",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "\u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: \u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T00:30:12.908355",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T00:30:22.113263",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T00:30:36.442414",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T00:30:45.725589",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T01:27:44.284212",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "HOTSPOT_RECONNECTED",
+    "status": "ACTIVE_MONITORING",
+    "details": "Network connection to gateway restored",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T01:27:59.945228",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "\u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: \u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T01:28:02.034822",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T01:28:59.555261",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T01:29:33.868415",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "\u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: \u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T01:29:35.475176",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T01:29:56.045271",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T01:31:36.509887",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T01:39:22.256256",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "HOTSPOT_RECONNECTED",
+    "status": "ACTIVE_MONITORING",
+    "details": "Network connection to gateway restored",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T01:39:59.265229",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T01:41:33.458180",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "HOTSPOT_RECONNECTED",
+    "status": "ACTIVE_MONITORING",
+    "details": "Network connection to gateway restored",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T01:48:37.932250",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "HOTSPOT_RECONNECTED",
+    "status": "ACTIVE_MONITORING",
+    "details": "Network connection to gateway restored",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T01:48:41.540166",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T01:49:09.376105",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T01:49:41.824391",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "HOTSPOT_RECONNECTED",
+    "status": "ACTIVE_MONITORING",
+    "details": "Network connection to gateway restored",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T01:49:53.108762",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_HELP",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_HELP",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T01:49:53.277998",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T01:50:24.061758",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T02:06:43.905803",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T02:06:46.595671",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "HOTSPOT_RECONNECTED",
+    "status": "ACTIVE_MONITORING",
+    "details": "Network connection to gateway restored",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T02:07:08.341042",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_HELP",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_HELP",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T02:07:08.381648",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T02:07:38.882743",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T02:09:46.561798",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "HOTSPOT_RECONNECTED",
+    "status": "ACTIVE_MONITORING",
+    "details": "Network connection to gateway restored",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T02:12:36.639513",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "HOTSPOT_RECONNECTED",
+    "status": "ACTIVE_MONITORING",
+    "details": "Network connection to gateway restored",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T02:14:04.909842",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_HELP",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_HELP",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T02:14:06.809668",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T02:15:17.998885",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T02:15:19.906401",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "CALL_ESCALATION_EXECUTED",
+    "status": "ACTIVE_MONITORING",
+    "details": "{'p1_status': 'CANCELLED', 'p2_status': 'NOT_ATTEMPTED'}",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:21:01.174665",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:23:31.019202",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "HOTSPOT_RECONNECTED",
+    "status": "ACTIVE_MONITORING",
+    "details": "Network connection to gateway restored",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:23:38.157716",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "\u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: \u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:23:40.532243",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:23:45.597961",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:23:55.175359",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:23:55.451049",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:23:55.647345",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:23:55.871159",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:23:56.082070",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:23:56.262220",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:23:56.418526",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:23:56.649309",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:23:56.859399",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:23:58.166574",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:23:58.407688",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:23:58.463811",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:23:58.665570",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:23:58.883476",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:23:59.141255",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:24:42.525523",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_EMERGENCY",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_EMERGENCY",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:24:44.414821",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:24:45.818481",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:25:08.688511",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:25:25.946306",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:29:07.256056",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "HOTSPOT_RECONNECTED",
+    "status": "ACTIVE_MONITORING",
+    "details": "Network connection to gateway restored",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:29:32.500628",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_HELP",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_HELP",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:29:34.379637",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:30:31.673174",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_HELP",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_HELP",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:30:33.452417",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:30:33.508908",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:30:33.697204",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "CALL_ESCALATION_EXECUTED",
+    "status": "ACTIVE_MONITORING",
+    "details": "{'p1_status': 'CANCELLED', 'p2_status': 'NOT_ATTEMPTED'}",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:31:18.091132",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_EMERGENCY",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_EMERGENCY",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:31:19.941736",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:31:24.722549",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:31:24.898790",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:32:31.344595",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_HELP",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_HELP",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:32:33.102497",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:32:33.177777",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "ACTIVE_MONITORING",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:33:25.010166",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_HELP",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_HELP",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:33:26.827795",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:33:27.030617",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:35:20.495827",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:38:36.097871",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_HELP",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_HELP",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:38:37.921335",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:40:05.640331",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:40:06.085702",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "CALL_ESCALATION_EXECUTED",
+    "status": "ACTIVE_MONITORING",
+    "details": "{'p1_status': 'CANCELLED', 'p2_status': 'NOT_ATTEMPTED'}",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:40:46.440000",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_EMERGENCY",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_EMERGENCY",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:40:48.275663",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:40:48.367692",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:41:34.935656",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:41:48.147942",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:42:17.953898",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T14:42:41.560679",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T17:37:09.893261",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_EMERGENCY",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_EMERGENCY",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T17:37:09.908280",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T17:37:18.351850",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T17:38:55.329500",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T17:40:23.897913",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_HELP",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_HELP",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T17:40:23.916889",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T17:40:32.307072",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T17:40:47.226828",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T17:41:51.564484",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_AURA",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_AURA",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T17:41:51.635846",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T17:41:58.685574",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T17:42:32.154075",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T17:42:43.687469",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T17:43:03.322430",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T17:50:06.560025",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_EMERGENCY",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_EMERGENCY",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T17:50:06.573761",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T17:50:10.063967",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T17:50:22.227014",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_EMERGENCY",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_EMERGENCY",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T17:50:22.561336",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T17:51:10.693580",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T17:54:21.551209",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T18:04:51.190093",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T19:33:05.614279",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T19:33:25.806821",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T19:35:56.504916",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T19:43:49.654470",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "\u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: \u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T19:43:49.935480",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T19:44:11.678419",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T20:15:11.863798",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T20:15:16.593779",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T20:15:27.788606",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T20:15:36.426439",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T20:15:48.996430",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_HELP",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_HELP",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T20:15:49.024648",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T20:15:55.268985",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T20:16:56.881767",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "HOTSPOT_RECONNECTED",
+    "status": "ACTIVE_MONITORING",
+    "details": "Network connection to gateway restored",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T20:17:16.909412",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_HELP",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_HELP",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T20:17:36.384099",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T20:18:13.424400",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T20:28:32.721736",
+    "latitude": 11.4925,
+    "longitude": 79.758,
+    "event": "DESTINATION_SET",
+    "status": "ACTIVE_MONITORING",
+    "details": "Target: Campus",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T20:28:34.229452",
+    "latitude": 11.48896,
+    "longitude": 79.75388,
+    "event": "DESTINATION_SET",
+    "status": "ACTIVE_MONITORING",
+    "details": "Target: Home",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T20:28:36.321764",
+    "latitude": 11.445,
+    "longitude": 79.708,
+    "event": "DESTINATION_SET",
+    "status": "ACTIVE_MONITORING",
+    "details": "Target: Metro",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T20:28:37.845532",
+    "latitude": 11.468,
+    "longitude": 79.712,
+    "event": "DESTINATION_SET",
+    "status": "ACTIVE_MONITORING",
+    "details": "Target: Police",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T20:46:50.146001",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "HOTSPOT_RECONNECTED",
+    "status": "ACTIVE_MONITORING",
+    "details": "Network connection to gateway restored",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T21:34:35.058330",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T21:34:41.023766",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T21:35:47.705817",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "HOTSPOT_RECONNECTED",
+    "status": "ACTIVE_MONITORING",
+    "details": "Network connection to gateway restored",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T21:36:05.999720",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_HELP",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_HELP",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T21:36:20.446722",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T21:38:06.402057",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "CALL_ESCALATION_EXECUTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "{'p1_status': 'UNANSWERED', 'p2_status': 'DISPATCHED'}",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T21:39:05.146654",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T21:45:33.962266",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "\u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: \u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T21:45:49.478773",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T21:45:55.030653",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T21:46:30.849934",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T22:37:03.675934",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T22:37:08.628812",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T23:32:12.566684",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T23:32:47.977857",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "HOTSPOT_RECONNECTED",
+    "status": "ACTIVE_MONITORING",
+    "details": "Network connection to gateway restored",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T23:33:08.070261",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_HELP",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_HELP",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T23:33:19.717126",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T23:33:39.887900",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T23:37:26.522340",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "HOTSPOT_RECONNECTED",
+    "status": "ACTIVE_MONITORING",
+    "details": "Network connection to gateway restored",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T23:37:51.511516",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_HELP",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_HELP",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T23:37:56.255359",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T23:38:18.048690",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T23:40:15.160708",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_HELP",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_HELP",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T23:40:26.687287",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T23:40:54.511279",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T23:41:28.964152",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_HELP",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_HELP",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-05T23:41:40.653199",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T00:35:59.316277",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_HELP",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_HELP",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T00:35:59.363044",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T00:36:11.531984",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T00:36:35.061075",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "HOTSPOT_RECONNECTED",
+    "status": "ACTIVE_MONITORING",
+    "details": "Network connection to gateway restored",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T00:36:48.697196",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_HELP",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_HELP",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T00:37:02.662339",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T00:40:21.574721",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T00:41:04.451385",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T00:41:15.890693",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_HELP",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_HELP",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T00:41:15.906621",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T00:41:18.012382",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T00:55:13.052274",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T08:45:49.526951",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "HOTSPOT_RECONNECTED",
+    "status": "ACTIVE_MONITORING",
+    "details": "Network connection to gateway restored",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T09:45:01.835027",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_EMERGENCY",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_EMERGENCY",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T09:45:01.855613",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T09:45:16.903503",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T11:11:46.052059",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "HOTSPOT_RECONNECTED",
+    "status": "ACTIVE_MONITORING",
+    "details": "Network connection to gateway restored",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T11:11:54.590285",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_HELP",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_HELP",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T11:12:06.174257",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T11:15:40.257027",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T11:17:51.037816",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "HOTSPOT_RECONNECTED",
+    "status": "ACTIVE_MONITORING",
+    "details": "Network connection to gateway restored",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T14:37:02.437418",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T14:37:04.778705",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "HOTSPOT_RECONNECTED",
+    "status": "ACTIVE_MONITORING",
+    "details": "Network connection to gateway restored",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T14:38:10.340477",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_HELP",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_HELP",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T14:38:10.368504",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T14:38:11.864000",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T14:38:19.831439",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "HOTSPOT_RECONNECTED",
+    "status": "ACTIVE_MONITORING",
+    "details": "Network connection to gateway restored",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T14:39:04.790801",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "HOTSPOT_RECONNECTED",
+    "status": "ACTIVE_MONITORING",
+    "details": "Network connection to gateway restored",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T14:39:46.974426",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_AURA",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_AURA",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T14:39:48.769383",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T14:39:51.360491",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "ACTIVE_MONITORING",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T14:39:57.274489",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T14:40:29.832629",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "HOTSPOT_RECONNECTED",
+    "status": "ACTIVE_MONITORING",
+    "details": "Network connection to gateway restored",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T14:41:33.710898",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_EMERGENCY",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_EMERGENCY",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T14:41:35.820921",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T14:41:35.960862",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T14:41:37.620734",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "ACTIVE_MONITORING",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T14:41:39.062655",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T14:42:21.454506",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T14:42:41.811745",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T14:42:56.581555",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: ",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T14:43:00.692516",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T14:43:06.981439",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T14:44:38.519744",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_EMERGENCY",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_EMERGENCY",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T14:44:42.708689",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T14:45:38.094556",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T14:46:12.124488",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_HELP",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_HELP",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T14:46:16.054431",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T14:46:27.532027",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T14:47:33.294216",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_HELP",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_HELP",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T14:47:36.999979",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T14:49:17.402497",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T14:50:03.002409",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T14:50:34.426909",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T17:58:57.316922",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "VOICE_EMERGENCY_HELP",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "Emergency activated: VOICE_EMERGENCY_HELP",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T17:58:57.343857",
+    "latitude": 11.490523,
+    "longitude": 79.76383,
+    "event": "RECORDING_STARTED",
+    "status": "EMERGENCY_TRIGGERED",
+    "details": "",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T17:59:27.404432",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T17:59:38.257590",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T17:59:44.343700",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T17:59:47.388826",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T17:59:47.739848",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-10-06T17:59:48.059472",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  },
+  {
+    "timestamp": "2026-11-04T19:00:36.452897",
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "event": "USER_SAFE_CONFIRMED",
+    "status": "ACTIVE_MONITORING",
+    "details": "User confirmed safe; alarms & cooldowns reset.",
+    "mode": "PRODUCTION"
+  }
+]

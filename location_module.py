@@ -168,6 +168,8 @@ class OfflineLocationEngine:
             "timestamp": current_time,
             "maps_url": f"https://maps.google.com/?q={round(self.current_lat, 6)},{round(self.current_lon, 6)}"
         }
+        if getattr(self, "gps_accuracy_m", None) is not None:
+            location_data["accuracy_m"] = self.gps_accuracy_m
 
         self.location_history.append(location_data)
         if len(self.location_history) > 100:

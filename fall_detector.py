@@ -22,6 +22,7 @@ import subprocess
 import threading
 import time
 import logging
+import sys
 
 logging.basicConfig(
     level=logging.INFO,
@@ -32,6 +33,7 @@ logger = logging.getLogger("fall_detector")
 
 HOST                  = "localhost"
 PORT                  = 8080
+FALL_SIM_PORT         = 8099
 
 FREEFALL_THRESHOLD    = 6.0    # m/s² (1g = 9.8 m/s²; drop drops below 6.0)
 IMPACT_THRESHOLD      = 8.0    # m/s² (captures drops from 8.0 up to 30.0+)
@@ -77,7 +79,21 @@ class FallDetector:
         t_adb.start()
         self._threads.append(t_adb)
 
-        logger.info("Fall Detector threads started (Client, Server & ADB).")
+        # Thread 4: background socket for simulated fall (no UI test button)
+        t_sim = threading.Thread(
+            target=self._run_fall_sim_socket, name="FallSimSocketThread", daemon=True
+        )
+        t_sim.start()
+        self._threads.append(t_sim)
+
+        # Thread 5: Ctrl+F global hotkey (Windows) without a dashboard test button
+        t_hot = threading.Thread(
+            target=self._run_hotkey_listener, name="FallHotkeyThread", daemon=True
+        )
+        t_hot.start()
+        self._threads.append(t_hot)
+
+        logger.info("Fall Detector threads started (Client, Server, ADB, socket, Ctrl+F).")
         return self
 
     def stop(self):
@@ -111,8 +127,63 @@ class FallDetector:
 
     def simulate_fall(self, reason="Programmatic Fall Test"):
         """Directly triggers the fall detection callback (used for testing/SOS validation)."""
+        now = time.monotonic()
+        if (now - self._last_trigger_time) < 4.0:
+            logger.info("Fall simulation debounced (%s).", reason)
+            return
+        self._last_trigger_time = now
         logger.info("🚨 [FallDetector] Simulating hardware fall event: %s", reason)
         self._fire_callback()
+
+    def _run_fall_sim_socket(self):
+        """UDP/TCP listener: send 'FALL' to localhost:8099 to simulate a drop without a UI button."""
+        sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        try:
+            sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+            sock.bind(("127.0.0.1", FALL_SIM_PORT))
+            sock.settimeout(1.0)
+            logger.info("Fall sim socket listening on UDP 127.0.0.1:%d (send FALL).", FALL_SIM_PORT)
+            while not self._stop_event.is_set():
+                try:
+                    data, _addr = sock.recvfrom(256)
+                except socket.timeout:
+                    continue
+                except Exception:
+                    break
+                text = data.decode("utf-8", errors="replace").strip().upper()
+                if "FALL" in text:
+                    self.simulate_fall("Background socket FALL command")
+        except Exception as exc:
+            logger.debug("Fall sim socket unavailable: %s", exc)
+        finally:
+            try:
+                sock.close()
+            except Exception:
+                pass
+
+    def _run_hotkey_listener(self):
+        """Windows Ctrl+F (GetAsyncKeyState) so a simulated fall works without a test button."""
+        if sys.platform != "win32":
+            return
+        try:
+            import ctypes
+        except Exception:
+            return
+        vk_f = 0x46
+        vk_ctrl = 0x11
+        was_down = False
+        logger.info("Fall hotkey armed: Ctrl+F (no UI test button).")
+        while not self._stop_event.is_set():
+            try:
+                ctrl = ctypes.windll.user32.GetAsyncKeyState(vk_ctrl) & 0x8000
+                key_f = ctypes.windll.user32.GetAsyncKeyState(vk_f) & 0x8000
+                down = bool(ctrl and key_f)
+                if down and not was_down:
+                    self.simulate_fall("Ctrl+F hotkey")
+                was_down = down
+            except Exception:
+                break
+            self._stop_event.wait(0.08)
 
     def process_sensor_sample(self, accel_xyz: tuple, gyro_xyz: tuple = None, now: float = None):
         """Processes a single raw accelerometer & gyroscope reading."""

@@ -1,5 +1,1059 @@
 {
-  "emergency_events": [],
+  "emergency_events": [
+    {
+      "event_id": "EV_1790758716392",
+      "timestamp": "2026-09-30T14:28:36.392156",
+      "threat_type": "\u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+      "latitude": 11.4615,
+      "longitude": 79.7271,
+      "maps_link": "https://maps.google.com/?q=11.461500,79.727100",
+      "audio_filename": "",
+      "contacts_notified": [
+        "7358347482"
+      ],
+      "call_status": "ESCALATION_PENDING_RESPONSE_TIMEOUT",
+      "sms_status": "{'p1_sms': 'OFFLINE_QUEUED_MACRODROID_DISPATCH', 'p2_sms': 'PENDING', 'macrodroid_webhook': 'DISPATCHED', 'contacts_sent': [{'contact': '7358347482', 'status': 'OFFLINE_QUEUED_MACRODROID_DISPATCH'}], 'maps_url': 'https://maps.google.com/?q=11.461500,79.727100'}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1790758814359",
+      "timestamp": "2026-09-30T14:30:14.359079",
+      "threat_type": "\u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+      "latitude": 11.4615,
+      "longitude": 79.7271,
+      "maps_link": "https://maps.google.com/?q=11.461500,79.727100",
+      "audio_filename": "",
+      "contacts_notified": [
+        "7358347482"
+      ],
+      "call_status": "ESCALATION_PENDING_RESPONSE_TIMEOUT",
+      "sms_status": "{'p1_sms': 'OFFLINE_QUEUED_MACRODROID_DISPATCH', 'p2_sms': 'PENDING', 'macrodroid_webhook': 'DISPATCHED', 'contacts_sent': [{'contact': '7358347482', 'status': 'OFFLINE_QUEUED_MACRODROID_DISPATCH'}], 'maps_url': 'https://maps.google.com/?q=11.461500,79.727100'}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1790777755725",
+      "timestamp": "2026-09-30T19:45:55.725438",
+      "threat_type": "\u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+      "latitude": 11.4615,
+      "longitude": 79.7271,
+      "maps_link": "https://maps.google.com/?q=11.461500,79.727100",
+      "audio_filename": "",
+      "contacts_notified": [
+        "9805673241",
+        "7586903214"
+      ],
+      "call_status": "ESCALATION_PENDING_RESPONSE_TIMEOUT",
+      "sms_status": "{'p1_sms': 'OFFLINE_QUEUED_MACRODROID_DISPATCH', 'p2_sms': 'OFFLINE_QUEUED_MACRODROID_DISPATCH', 'macrodroid_webhook': 'DISPATCHED', 'contacts_sent': [{'contact': '9805673241', 'status': 'OFFLINE_QUEUED_MACRODROID_DISPATCH'}, {'contact': '7586903214', 'status': 'OFFLINE_QUEUED_MACRODROID_DISPATCH'}], 'maps_url': 'https://maps.google.com/?q=11.461500,79.727100'}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1790777934323",
+      "timestamp": "2026-09-30T19:48:54.323583",
+      "threat_type": "\u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+      "latitude": 11.4615,
+      "longitude": 79.7271,
+      "maps_link": "https://maps.google.com/?q=11.461500,79.727100",
+      "audio_filename": "",
+      "contacts_notified": [
+        "9805673241",
+        "7586903214"
+      ],
+      "call_status": "ESCALATION_PENDING_RESPONSE_TIMEOUT",
+      "sms_status": "{'p1_sms': 'OFFLINE_QUEUED_MACRODROID_DISPATCH', 'p2_sms': 'OFFLINE_QUEUED_MACRODROID_DISPATCH', 'macrodroid_webhook': 'DISPATCHED', 'contacts_sent': [{'contact': '9805673241', 'status': 'OFFLINE_QUEUED_MACRODROID_DISPATCH'}, {'contact': '7586903214', 'status': 'OFFLINE_QUEUED_MACRODROID_DISPATCH'}], 'maps_url': 'https://maps.google.com/?q=11.461500,79.727100'}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1790778047919",
+      "timestamp": "2026-09-30T19:50:47.919488",
+      "threat_type": "\u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+      "latitude": 11.4615,
+      "longitude": 79.7271,
+      "maps_link": "https://maps.google.com/?q=11.461500,79.727100",
+      "audio_filename": "",
+      "contacts_notified": [
+        "9805673241",
+        "7586903214"
+      ],
+      "call_status": "ESCALATION_PENDING_RESPONSE_TIMEOUT",
+      "sms_status": "{'p1_sms': 'OFFLINE_QUEUED_MACRODROID_DISPATCH', 'p2_sms': 'OFFLINE_QUEUED_MACRODROID_DISPATCH', 'macrodroid_webhook': 'DISPATCHED', 'contacts_sent': [{'contact': '9805673241', 'status': 'OFFLINE_QUEUED_MACRODROID_DISPATCH'}, {'contact': '7586903214', 'status': 'OFFLINE_QUEUED_MACRODROID_DISPATCH'}], 'maps_url': 'https://maps.google.com/?q=11.461500,79.727100'}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1790952841013",
+      "timestamp": "2026-10-02T20:24:01.013082",
+      "threat_type": "\u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+      "latitude": 11.490505,
+      "longitude": 79.763768,
+      "maps_link": "https://maps.google.com/?q=11.490505,79.763768",
+      "audio_filename": "",
+      "contacts_notified": [
+        "9994569481",
+        "9791017243"
+      ],
+      "call_status": "ESCALATION_PENDING_RESPONSE_TIMEOUT",
+      "sms_status": "{'p1_sms': 'OFFLINE_QUEUED_MACRODROID_DISPATCH', 'p2_sms': 'OFFLINE_QUEUED_MACRODROID_DISPATCH', 'macrodroid_webhook': 'DISPATCHED', 'contacts_sent': [{'contact': '9994569481', 'status': 'OFFLINE_QUEUED_MACRODROID_DISPATCH'}, {'contact': '9791017243', 'status': 'OFFLINE_QUEUED_MACRODROID_DISPATCH'}], 'maps_url': 'https://maps.google.com/?q=11.490505,79.763768'}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791109270460",
+      "timestamp": "2026-10-04T15:51:10.460656",
+      "threat_type": "VOICE_EMERGENCY_HELP",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [
+        "9994569481",
+        "9791017243"
+      ],
+      "call_status": "ESCALATION_PENDING_RESPONSE_TIMEOUT",
+      "sms_status": "None",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791110894570",
+      "timestamp": "2026-10-04T16:18:14.570941",
+      "threat_type": "\ud83d\udea8 MANUAL SOS (MISSION CONTROL MAP)",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [
+        "9994569481",
+        "9791017243"
+      ],
+      "call_status": "ESCALATION_PENDING_RESPONSE_TIMEOUT",
+      "sms_status": "None",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791111536818",
+      "timestamp": "2026-10-04T16:28:56.818294",
+      "threat_type": "VOICE_EMERGENCY_HELP",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [
+        "9994569481",
+        "9791017243"
+      ],
+      "call_status": "ESCALATION_PENDING_RESPONSE_TIMEOUT",
+      "sms_status": "None",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791114298095",
+      "timestamp": "2026-10-04T17:14:58.095234",
+      "threat_type": "\ud83d\udea8 MANUAL SOS (MISSION CONTROL MAP)",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [
+        "9994569481",
+        "9791017243"
+      ],
+      "call_status": "ESCALATION_PENDING_RESPONSE_TIMEOUT",
+      "sms_status": "None",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791114502324",
+      "timestamp": "2026-10-04T17:18:22.324130",
+      "threat_type": "\u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [
+        "9994569481",
+        "9791017243"
+      ],
+      "call_status": "ESCALATION_PENDING_RESPONSE_TIMEOUT",
+      "sms_status": "None",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791114622716",
+      "timestamp": "2026-10-04T17:20:22.716879",
+      "threat_type": "\ud83d\udca5 HARD FALL / DROP DETECTED",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [
+        "9994569481",
+        "9791017243"
+      ],
+      "call_status": "ESCALATION_PENDING_RESPONSE_TIMEOUT",
+      "sms_status": "None",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791117323906",
+      "timestamp": "2026-10-04T18:05:23.906820",
+      "threat_type": "VOICE_EMERGENCY_HELP",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [],
+      "call_status": "OFFLINE_LOCAL_SIREN",
+      "sms_status": "{'mode': 'OFFLINE_LOCAL_SIREN', 'sms_sent': 0, 'call_dispatched': False}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791117421534",
+      "timestamp": "2026-10-04T18:07:01.534898",
+      "threat_type": "VOICE_EMERGENCY_HELP",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [],
+      "call_status": "OFFLINE_LOCAL_SIREN",
+      "sms_status": "{'mode': 'OFFLINE_LOCAL_SIREN', 'sms_sent': 0, 'call_dispatched': False}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791118919422",
+      "timestamp": "2026-10-04T18:31:59.422317",
+      "threat_type": "\u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [
+        "9994569481",
+        "9791017243"
+      ],
+      "call_status": "ESCALATION_PENDING_RESPONSE_TIMEOUT",
+      "sms_status": "{'sms_sent': 0, 'call_dispatched': False}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791123952415",
+      "timestamp": "2026-10-04T19:55:52.415991",
+      "threat_type": "VOICE_EMERGENCY_HELP",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [
+        "9994569481",
+        "9791017243"
+      ],
+      "call_status": "CALL_DISPATCHED",
+      "sms_status": "{'sms_sent': 2, 'call_dispatched': True}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791124021982",
+      "timestamp": "2026-10-04T19:57:01.982542",
+      "threat_type": "VOICE_EMERGENCY_HELP",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [
+        "9994569481",
+        "9791017243"
+      ],
+      "call_status": "CALL_DISPATCHED",
+      "sms_status": "{'sms_sent': 2, 'call_dispatched': True}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791124208782",
+      "timestamp": "2026-10-04T20:00:08.782459",
+      "threat_type": "",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [
+        "9994569481",
+        "9791017243"
+      ],
+      "call_status": "ESCALATION_PENDING_RESPONSE_TIMEOUT",
+      "sms_status": "{'sms_sent': 2, 'call_dispatched': True}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791126860750",
+      "timestamp": "2026-10-04T20:44:20.750209",
+      "threat_type": "\ud83d\udea8 MANUAL SOS (MISSION CONTROL MAP)",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [
+        "9994569481",
+        "9791017243"
+      ],
+      "call_status": "ESCALATION_PENDING_RESPONSE_TIMEOUT",
+      "sms_status": "{'sms_sent': 0, 'call_dispatched': False, 'sms_completed_at': 1421875.25}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791127089904",
+      "timestamp": "2026-10-04T20:48:09.904954",
+      "threat_type": "VOICE_EMERGENCY_HELP",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [],
+      "call_status": "OFFLINE_LOCAL_SIREN",
+      "sms_status": "{'mode': 'OFFLINE_LOCAL_SIREN', 'sms_sent': 0, 'call_dispatched': False}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791134504028",
+      "timestamp": "2026-10-04T22:51:44.028530",
+      "threat_type": "VOICE_EMERGENCY_HELP",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [],
+      "call_status": "OFFLINE_LOCAL_SIREN",
+      "sms_status": "{'mode': 'OFFLINE_LOCAL_SIREN', 'sms_sent': 0, 'call_dispatched': False}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791136084241",
+      "timestamp": "2026-10-04T23:18:04.241186",
+      "threat_type": "VOICE_EMERGENCY_HELP",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [],
+      "call_status": "OFFLINE_LOCAL_SIREN",
+      "sms_status": "{'mode': 'OFFLINE_LOCAL_SIREN', 'sms_sent': 0, 'call_dispatched': False}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791136134658",
+      "timestamp": "2026-10-04T23:18:54.659622",
+      "threat_type": "VOICE_EMERGENCY_HELP",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [],
+      "call_status": "OFFLINE_LOCAL_SIREN",
+      "sms_status": "{'mode': 'OFFLINE_LOCAL_SIREN', 'sms_sent': 0, 'call_dispatched': False}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791137177565",
+      "timestamp": "2026-10-04T23:36:17.565148",
+      "threat_type": "VOICE_EMERGENCY_HELP",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [],
+      "call_status": "SMS_FAILED_LOCAL_SIREN",
+      "sms_status": "{'sms_sent': 0, 'call_dispatched': False, 'sms_completed_at': 1432192.031}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791140412937",
+      "timestamp": "2026-10-05T00:30:12.937878",
+      "threat_type": "\u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [
+        "9994569481"
+      ],
+      "call_status": "ESCALATION_PENDING_RESPONSE_TIMEOUT",
+      "sms_status": "{'sms_sent': 0, 'call_dispatched': False, 'sms_completed_at': 1435427.421}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791143882080",
+      "timestamp": "2026-10-05T01:28:02.080067",
+      "threat_type": "\u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [
+        "9994569481"
+      ],
+      "call_status": "ESCALATION_PENDING_RESPONSE_TIMEOUT",
+      "sms_status": "{'sms_sent': 1, 'call_dispatched': False, 'sms_completed_at': 1438896.546}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791143975503",
+      "timestamp": "2026-10-05T01:29:35.503866",
+      "threat_type": "\u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [
+        "9994569481"
+      ],
+      "call_status": "ESCALATION_PENDING_RESPONSE_TIMEOUT",
+      "sms_status": "{'sms_sent': 1, 'call_dispatched': False, 'sms_completed_at': 1438989.984}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791145193320",
+      "timestamp": "2026-10-05T01:49:53.320458",
+      "threat_type": "VOICE_EMERGENCY_HELP",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [
+        "9994569481"
+      ],
+      "call_status": "CALLS_PENDING_AFTER_60S",
+      "sms_status": "{'sms_sent': 1, 'call_dispatched': False, 'sms_completed_at': 1440207.781}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791146228421",
+      "timestamp": "2026-10-05T02:07:08.421671",
+      "threat_type": "VOICE_EMERGENCY_HELP",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [],
+      "call_status": "OFFLINE_LOCAL_SIREN",
+      "sms_status": "{'mode': 'OFFLINE_LOCAL_SIREN', 'sms_sent': 0, 'call_dispatched': False}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791146646872",
+      "timestamp": "2026-10-05T02:14:06.872448",
+      "threat_type": "VOICE_EMERGENCY_HELP",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [
+        "9994569481"
+      ],
+      "call_status": "CALLS_PENDING_AFTER_60S",
+      "sms_status": "{'sms_sent': 1, 'call_dispatched': False, 'sms_completed_at': 1441661.328}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791190420563",
+      "timestamp": "2026-10-05T14:23:40.563332",
+      "threat_type": "\u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [
+        "9791017243"
+      ],
+      "call_status": "ESCALATION_PENDING_RESPONSE_TIMEOUT",
+      "sms_status": "{'sms_sent': 1, 'call_dispatched': False, 'sms_completed_at': 1485435.031}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791190484455",
+      "timestamp": "2026-10-05T14:24:44.455833",
+      "threat_type": "VOICE_EMERGENCY_EMERGENCY",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [
+        "9791017243"
+      ],
+      "call_status": "CALLS_PENDING_AFTER_60S",
+      "sms_status": "{'sms_sent': 1, 'call_dispatched': False, 'sms_completed_at': 1485498.921}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791190774415",
+      "timestamp": "2026-10-05T14:29:34.415908",
+      "threat_type": "VOICE_EMERGENCY_HELP",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [
+        "9791017243"
+      ],
+      "call_status": "CALLS_PENDING_AFTER_60S",
+      "sms_status": "{'sms_sent': 1, 'call_dispatched': False, 'sms_completed_at': 1485788.875}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791190833470",
+      "timestamp": "2026-10-05T14:30:33.470867",
+      "threat_type": "VOICE_EMERGENCY_HELP",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [
+        "9791017243"
+      ],
+      "call_status": "CALLS_PENDING_AFTER_60S",
+      "sms_status": "{'sms_sent': 1, 'call_dispatched': False, 'sms_completed_at': 1485847.968}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791190879978",
+      "timestamp": "2026-10-05T14:31:19.978294",
+      "threat_type": "VOICE_EMERGENCY_EMERGENCY",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [
+        "9791017243"
+      ],
+      "call_status": "CALLS_PENDING_AFTER_60S",
+      "sms_status": "{'sms_sent': 1, 'call_dispatched': False, 'sms_completed_at': 1485894.453}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791190953201",
+      "timestamp": "2026-10-05T14:32:33.201102",
+      "threat_type": "VOICE_EMERGENCY_HELP",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [
+        "9791017243"
+      ],
+      "call_status": "CALLS_PENDING_AFTER_60S",
+      "sms_status": "{'sms_sent': 1, 'call_dispatched': False, 'sms_completed_at': 1485967.687}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791191006862",
+      "timestamp": "2026-10-05T14:33:26.862698",
+      "threat_type": "VOICE_EMERGENCY_HELP",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [
+        "9791017243"
+      ],
+      "call_status": "CALLS_PENDING_AFTER_60S",
+      "sms_status": "{'sms_sent': 1, 'call_dispatched': False, 'sms_completed_at': 1486021.343}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791191317968",
+      "timestamp": "2026-10-05T14:38:37.968179",
+      "threat_type": "VOICE_EMERGENCY_HELP",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [
+        "9791017243"
+      ],
+      "call_status": "CALLS_PENDING_AFTER_60S",
+      "sms_status": "{'sms_sent': 1, 'call_dispatched': False, 'sms_completed_at': 1486332.437}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791191448290",
+      "timestamp": "2026-10-05T14:40:48.290790",
+      "threat_type": "VOICE_EMERGENCY_EMERGENCY",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [
+        "9791017243"
+      ],
+      "call_status": "CALLS_PENDING_AFTER_60S",
+      "sms_status": "{'sms_sent': 1, 'call_dispatched': False, 'sms_completed_at': 1486462.781}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791202029951",
+      "timestamp": "2026-10-05T17:37:09.951251",
+      "threat_type": "VOICE_EMERGENCY_EMERGENCY",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [],
+      "call_status": "OFFLINE_LOCAL_SIREN",
+      "sms_status": "{'mode': 'OFFLINE_LOCAL_SIREN', 'sms_sent': 0, 'call_dispatched': False}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791202223957",
+      "timestamp": "2026-10-05T17:40:23.957840",
+      "threat_type": "VOICE_EMERGENCY_HELP",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [],
+      "call_status": "OFFLINE_LOCAL_SIREN",
+      "sms_status": "{'mode': 'OFFLINE_LOCAL_SIREN', 'sms_sent': 0, 'call_dispatched': False}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791202311727",
+      "timestamp": "2026-10-05T17:41:51.727818",
+      "threat_type": "VOICE_EMERGENCY_AURA",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [],
+      "call_status": "OFFLINE_LOCAL_SIREN",
+      "sms_status": "{'mode': 'OFFLINE_LOCAL_SIREN', 'sms_sent': 0, 'call_dispatched': False}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791202806615",
+      "timestamp": "2026-10-05T17:50:06.615445",
+      "threat_type": "VOICE_EMERGENCY_EMERGENCY",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [],
+      "call_status": "OFFLINE_LOCAL_SIREN",
+      "sms_status": "{'mode': 'OFFLINE_LOCAL_SIREN', 'sms_sent': 0, 'call_dispatched': False}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791202822681",
+      "timestamp": "2026-10-05T17:50:22.681246",
+      "threat_type": "VOICE_EMERGENCY_EMERGENCY",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [],
+      "call_status": "OFFLINE_LOCAL_SIREN",
+      "sms_status": "{'mode': 'OFFLINE_LOCAL_SIREN', 'sms_sent': 0, 'call_dispatched': False}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791209629989",
+      "timestamp": "2026-10-05T19:43:49.989422",
+      "threat_type": "\u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [
+        "9994569481",
+        "9940847039",
+        "9791017243",
+        "6374469531"
+      ],
+      "call_status": "ESCALATION_PENDING_RESPONSE_TIMEOUT",
+      "sms_status": "{'sms_sent': 0, 'call_dispatched': False, 'sms_completed_at': 1504644.437}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791211549063",
+      "timestamp": "2026-10-05T20:15:49.063809",
+      "threat_type": "VOICE_EMERGENCY_HELP",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [],
+      "call_status": "OFFLINE_LOCAL_SIREN",
+      "sms_status": "{'mode': 'OFFLINE_LOCAL_SIREN', 'sms_sent': 0, 'call_dispatched': False}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791211656437",
+      "timestamp": "2026-10-05T20:17:36.437543",
+      "threat_type": "VOICE_EMERGENCY_HELP",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [
+        "9994569481",
+        "9940847039",
+        "9791017243",
+        "6374469531"
+      ],
+      "call_status": "CALLS_PENDING_AFTER_60S",
+      "sms_status": "{'sms_sent': 4, 'call_dispatched': False, 'sms_completed_at': 1506670.89}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791216380589",
+      "timestamp": "2026-10-05T21:36:20.589525",
+      "threat_type": "VOICE_EMERGENCY_HELP",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [
+        "9994569481",
+        "9940847039",
+        "9791017243",
+        "6374469531"
+      ],
+      "call_status": "CALLS_PENDING_AFTER_60s",
+      "sms_status": "{'sms_sent': 4, 'call_dispatched': False, 'sms_completed_at': 1511394.953}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791216949511",
+      "timestamp": "2026-10-05T21:45:49.511271",
+      "threat_type": "\u26a0\ufe0f CRITICAL THREAT DETECTED \u26a0\ufe0f",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [
+        "9994569481",
+        "9940847039",
+        "9791017243",
+        "6374469531"
+      ],
+      "call_status": "ESCALATION_PENDING_RESPONSE_TIMEOUT",
+      "sms_status": "{'sms_sent': 4, 'call_dispatched': False, 'sms_completed_at': 1511963.984}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791223399801",
+      "timestamp": "2026-10-05T23:33:19.801954",
+      "threat_type": "VOICE_EMERGENCY_HELP",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [
+        "9940847039",
+        "9791017243",
+        "6374469531"
+      ],
+      "call_status": "CALLS_STARTING_AFTER_SMS",
+      "sms_status": "{'sms_sent': 3, 'call_dispatched': False, 'sms_completed_at': 1518414.218}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791223676283",
+      "timestamp": "2026-10-05T23:37:56.283800",
+      "threat_type": "VOICE_EMERGENCY_HELP",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [
+        "6789054321"
+      ],
+      "call_status": "CALLS_STARTING_AFTER_SMS",
+      "sms_status": "{'sms_sent': 1, 'call_dispatched': False, 'sms_completed_at': 1518690.765}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791223826716",
+      "timestamp": "2026-10-05T23:40:26.716421",
+      "threat_type": "VOICE_EMERGENCY_HELP",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [
+        "6789054321",
+        "7358955724",
+        "9791017243"
+      ],
+      "call_status": "CALLS_STARTING_AFTER_SMS",
+      "sms_status": "{'sms_sent': 3, 'call_dispatched': False, 'sms_completed_at': 1518841.203}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791223900701",
+      "timestamp": "2026-10-05T23:41:40.701319",
+      "threat_type": "VOICE_EMERGENCY_HELP",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [
+        "9940847039",
+        "7358955724",
+        "9791017243"
+      ],
+      "call_status": "CALLS_STARTING_AFTER_SMS",
+      "sms_status": "{'sms_sent': 3, 'call_dispatched': False, 'sms_completed_at': 1518915.156}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791227159417",
+      "timestamp": "2026-10-06T00:35:59.417943",
+      "threat_type": "VOICE_EMERGENCY_HELP",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [],
+      "call_status": "OFFLINE_LOCAL_SIREN",
+      "sms_status": "{'mode': 'OFFLINE_LOCAL_SIREN', 'sms_sent': 0, 'call_dispatched': False}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791227222684",
+      "timestamp": "2026-10-06T00:37:02.684903",
+      "threat_type": "VOICE_EMERGENCY_HELP",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [
+        "9940847039",
+        "7358955724",
+        "9791017243"
+      ],
+      "call_status": "CALLS_STARTING_AFTER_SMS",
+      "sms_status": "{'sms_sent': 3, 'call_dispatched': False, 'sms_completed_at': 1522237.171}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791227475943",
+      "timestamp": "2026-10-06T00:41:15.943204",
+      "threat_type": "VOICE_EMERGENCY_HELP",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [],
+      "call_status": "OFFLINE_LOCAL_SIREN",
+      "sms_status": "{'mode': 'OFFLINE_LOCAL_SIREN', 'sms_sent': 0, 'call_dispatched': False}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791260101910",
+      "timestamp": "2026-10-06T09:45:01.910678",
+      "threat_type": "VOICE_EMERGENCY_EMERGENCY",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [],
+      "call_status": "OFFLINE_LOCAL_SIREN",
+      "sms_status": "{'mode': 'OFFLINE_LOCAL_SIREN', 'sms_sent': 0, 'call_dispatched': False}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791265326210",
+      "timestamp": "2026-10-06T11:12:06.210260",
+      "threat_type": "VOICE_EMERGENCY_HELP",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [
+        "9791017243",
+        "6374469531",
+        "7358347482"
+      ],
+      "call_status": "CALLS_STARTING_AFTER_SMS",
+      "sms_status": "{'sms_sent': 3, 'call_dispatched': False, 'sms_completed_at': 1560338.75}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791277690402",
+      "timestamp": "2026-10-06T14:38:10.402020",
+      "threat_type": "VOICE_EMERGENCY_HELP",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [],
+      "call_status": "OFFLINE_LOCAL_SIREN",
+      "sms_status": "{'mode': 'OFFLINE_LOCAL_SIREN', 'sms_sent': 0, 'call_dispatched': False}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791277791392",
+      "timestamp": "2026-10-06T14:39:51.392654",
+      "threat_type": "VOICE_EMERGENCY_AURA",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [],
+      "call_status": "SMS_FAILED_LOCAL_SIREN",
+      "sms_status": "{'sms_sent': 0, 'call_dispatched': False, 'sms_completed_at': 1572803.937}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791277897650",
+      "timestamp": "2026-10-06T14:41:37.650944",
+      "threat_type": "VOICE_EMERGENCY_EMERGENCY",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [
+        "9791017243"
+      ],
+      "call_status": "CALLS_STARTING_AFTER_SMS",
+      "sms_status": "{'sms_sent': 1, 'call_dispatched': False, 'sms_completed_at': 1572910.203}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791277980727",
+      "timestamp": "2026-10-06T14:43:00.727017",
+      "threat_type": "",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [
+        "9791017243"
+      ],
+      "call_status": "ESCALATION_PENDING_RESPONSE_TIMEOUT",
+      "sms_status": "{'sms_sent': 1, 'call_dispatched': False, 'sms_completed_at': 1572993.281}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791278082732",
+      "timestamp": "2026-10-06T14:44:42.732892",
+      "threat_type": "VOICE_EMERGENCY_EMERGENCY",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [
+        "9791017243"
+      ],
+      "call_status": "CALLS_STARTING_AFTER_SMS",
+      "sms_status": "{'sms_sent': 1, 'call_dispatched': False, 'sms_completed_at': 1573095.265}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791278176097",
+      "timestamp": "2026-10-06T14:46:16.097157",
+      "threat_type": "VOICE_EMERGENCY_HELP",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [
+        "9791017243"
+      ],
+      "call_status": "CALLS_STARTING_AFTER_SMS",
+      "sms_status": "{'sms_sent': 1, 'call_dispatched': False, 'sms_completed_at': 1573188.64}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791278257036",
+      "timestamp": "2026-10-06T14:47:37.036993",
+      "threat_type": "VOICE_EMERGENCY_HELP",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [
+        "9791017243"
+      ],
+      "call_status": "CALLS_STARTING_AFTER_SMS",
+      "sms_status": "{'sms_sent': 1, 'call_dispatched': False, 'sms_completed_at': 1573269.578}",
+      "synced": false,
+      "retry_count": 0
+    },
+    {
+      "event_id": "EV_1791289737381",
+      "timestamp": "2026-10-06T17:58:57.381126",
+      "threat_type": "VOICE_EMERGENCY_HELP",
+      "latitude": 11.490523,
+      "longitude": 79.76383,
+      "maps_link": "https://maps.google.com/?q=11.490523,79.763830",
+      "audio_filename": "",
+      "contacts_notified": [],
+      "call_status": "OFFLINE_LOCAL_SIREN",
+      "sms_status": "{'mode': 'OFFLINE_LOCAL_SIREN', 'sms_sent': 0, 'call_dispatched': False}",
+      "synced": false,
+      "retry_count": 0
+    }
+  ],
   "audio_queue": [],
   "geofence_events": []
 }
